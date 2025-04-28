@@ -4,13 +4,13 @@
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
 
-    <record model="mis.report" id="mis_report_bs">
-      <field name="name">Balance Sheet</field>
+    <record model="mis.report" id="mis_report_bs_skr04">
+      <field name="name">Balance Sheet (SKR04)</field>
       <field name="description">German Balance Sheet for SKR04 (§ 266 HGB)</field>
       <field name="style_id" ref="mis_report_style_l10n_de_base" />
     </record>
-    <record model="mis.report.kpi" id="mis_report_bs_anlagevermoegen">
-      <field name="report_id" ref="mis_report_bs" />
+    <record model="mis.report.kpi" id="mis_report_bs_skr04_anlagevermoegen">
+      <field name="report_id" ref="mis_report_bs_skr04" />
       <field name="name">anlagevermoegen</field>
       <field name="description">A. Anlagevermögen</field>
       <field name="type">str</field>
@@ -18,8 +18,8 @@
       <field name="style_id" ref="style_l10n_de_level1_green" />
       <field name="sequence">10</field>
     </record>
-    <record model="mis.report.kpi" id="mis_report_bs_immaterielle">
-      <field name="report_id" ref="mis_report_bs" />
+    <record model="mis.report.kpi" id="mis_report_bs_skr04_immaterielle">
+      <field name="report_id" ref="mis_report_bs_skr04" />
       <field name="name">immaterielle</field>
       <field name="description">I. Immaterielle Vermögensgegenstände</field>
       <field name="type">str</field>
@@ -27,8 +27,8 @@
       <field name="style_id" ref="style_l10n_de_level2" />
       <field name="sequence">20</field>
     </record>
-    <record model="mis.report.kpi" id="mis_report_bs_schutzrechte">
-      <field name="report_id" ref="mis_report_bs" />
+    <record model="mis.report.kpi" id="mis_report_bs_skr04_schutzrechte">
+      <field name="report_id" ref="mis_report_bs_skr04" />
       <field name="name">schutzrechte</field>
       <field
             name="description"
@@ -41,8 +41,8 @@
       <field name="auto_expand_accounts_style_id" ref="style_l10n_de_level3_accounts" />
       <field name="sequence">30</field>
     </record>
-    <record model="mis.report.kpi" id="mis_report_bs_konzessionen">
-      <field name="report_id" ref="mis_report_bs" />
+    <record model="mis.report.kpi" id="mis_report_bs_skr04_konzessionen">
+      <field name="report_id" ref="mis_report_bs_skr04" />
       <field name="name">konzessionen</field>
       <field name="description">2. Konzessionen, Lizenzen u.ä. Rechte u. Werte </field>
       <field name="expression">bals[010%,011%,012%,013%,0140%]</field>
@@ -53,8 +53,8 @@
       <field name="auto_expand_accounts_style_id" ref="style_l10n_de_level3_accounts" />
       <field name="sequence">40</field>
     </record>
-    <record model="mis.report.kpi" id="mis_report_bs_firmenwert">
-      <field name="report_id" ref="mis_report_bs" />
+    <record model="mis.report.kpi" id="mis_report_bs_skr04_firmenwert">
+      <field name="report_id" ref="mis_report_bs_skr04" />
       <field name="name">firmenwert</field>
       <field name="description">3. Geschäfts- oder Firmenwert</field>
       <field name="expression">bals[015%,016%]</field>
@@ -65,8 +65,8 @@
       <field name="auto_expand_accounts_style_id" ref="style_l10n_de_level3_accounts" />
       <field name="sequence">50</field>
     </record>
-    <record model="mis.report.kpi" id="mis_report_bs_geleistetet_anzahlungen">
-      <field name="report_id" ref="mis_report_bs" />
+    <record model="mis.report.kpi" id="mis_report_bs_skr04_geleistetet_anzahlungen">
+      <field name="report_id" ref="mis_report_bs_skr04" />
       <field name="name">geleistete_anzahlungen</field>
       <field name="description">4. Geleistete Anzahlungen</field>
       <field name="expression">bals[017%]</field>
@@ -77,8 +77,8 @@
       <field name="auto_expand_accounts_style_id" ref="style_l10n_de_level3_accounts" />
       <field name="sequence">60</field>
     </record>
-    <record model="mis.report.kpi" id="mis_report_bs_total_immaterielle">
-      <field name="report_id" ref="mis_report_bs" />
+    <record model="mis.report.kpi" id="mis_report_bs_skr04_total_immaterielle">
+      <field name="report_id" ref="mis_report_bs_skr04" />
       <field name="name">total_immaterielle</field>
       <field name="description">Total I. Immaterielle Vermögensgegenstände</field>
       <field
@@ -89,8 +89,8 @@
       <field name="style_id" ref="style_l10n_de_level3_total" />
       <field name="sequence">70</field>
     </record>
-    <record model="mis.report.kpi" id="mis_report_ii_sachanlagen">
-      <field name="report_id" ref="mis_report_bs" />
+    <record model="mis.report.kpi" id="mis_report_ii_skr04_sachanlagen">
+      <field name="report_id" ref="mis_report_bs_skr04" />
       <field name="name">ii_sachanlagen</field>
       <field name="description">II. Sachanlagen</field>
       <field name="type">str</field>
@@ -98,8 +98,8 @@
       <field name="style_id" ref="style_l10n_de_level2" />
       <field name="sequence">80</field>
     </record>
-    <record model="mis.report.kpi" id="mis_report_bs_grundstueck">
-      <field name="report_id" ref="mis_report_bs" />
+    <record model="mis.report.kpi" id="mis_report_bs_skr04_grundstueck">
+      <field name="report_id" ref="mis_report_bs_skr04" />
       <field name="name">grundstueck</field>
       <field name="description">1. Grundstücke, grundstücksgl. Rechte u. Bauten </field>
       <field name="expression">bals[02%,03%]</field>
@@ -110,8 +110,8 @@
       <field name="auto_expand_accounts_style_id" ref="style_l10n_de_level3_accounts" />
       <field name="sequence">90</field>
     </record>
-    <record model="mis.report.kpi" id="mis_report_bs_maschinen">
-      <field name="report_id" ref="mis_report_bs" />
+    <record model="mis.report.kpi" id="mis_report_bs_skr04_maschinen">
+      <field name="report_id" ref="mis_report_bs_skr04" />
       <field name="name">maschinen</field>
       <field name="description">2. Technische Anlagen und Maschinen</field>
       <field name="expression">bals[04%]</field>
@@ -122,8 +122,8 @@
       <field name="auto_expand_accounts_style_id" ref="style_l10n_de_level3_accounts" />
       <field name="sequence">100</field>
     </record>
-    <record model="mis.report.kpi" id="mis_report_bs_ausstattung">
-      <field name="report_id" ref="mis_report_bs" />
+    <record model="mis.report.kpi" id="mis_report_bs_skr04_ausstattung">
+      <field name="report_id" ref="mis_report_bs_skr04" />
       <field name="name">ausstattung</field>
       <field
             name="description"
@@ -136,8 +136,8 @@
       <field name="auto_expand_accounts_style_id" ref="style_l10n_de_level3_accounts" />
       <field name="sequence">110</field>
     </record>
-    <record model="mis.report.kpi" id="mis_report_bs_anlagen_im_bau">
-      <field name="report_id" ref="mis_report_bs" />
+    <record model="mis.report.kpi" id="mis_report_bs_skr04_anlagen_im_bau">
+      <field name="report_id" ref="mis_report_bs_skr04" />
       <field name="name">anlagen_im_bau</field>
       <field name="description">4. Geleistete Anz. u. Anlagen i. Bau</field>
       <field name="expression">bals[07%]</field>
@@ -148,8 +148,8 @@
       <field name="auto_expand_accounts_style_id" ref="style_l10n_de_level3_accounts" />
       <field name="sequence">120</field>
     </record>
-    <record model="mis.report.kpi" id="mis_report_bs_total_sachanlagen">
-      <field name="report_id" ref="mis_report_bs" />
+    <record model="mis.report.kpi" id="mis_report_bs_skr04_total_sachanlagen">
+      <field name="report_id" ref="mis_report_bs_skr04" />
       <field name="name">total_sachanlagen</field>
       <field name="description">Total II. Sachanlagen</field>
       <field
@@ -160,8 +160,8 @@
       <field name="style_id" ref="style_l10n_de_level3_total" />
       <field name="sequence">130</field>
     </record>
-    <record model="mis.report.kpi" id="mis_report_iii_finanzanlagen">
-      <field name="report_id" ref="mis_report_bs" />
+    <record model="mis.report.kpi" id="mis_report_iii_skr04_finanzanlagen">
+      <field name="report_id" ref="mis_report_bs_skr04" />
       <field name="name">iii_finanzanlagen</field>
       <field name="description">III. Finanzanlagen</field>
       <field name="type">str</field>
@@ -169,8 +169,8 @@
       <field name="style_id" ref="style_l10n_de_level2" />
       <field name="sequence">140</field>
     </record>
-    <record model="mis.report.kpi" id="mis_report_bs_anteile">
-      <field name="report_id" ref="mis_report_bs" />
+    <record model="mis.report.kpi" id="mis_report_bs_skr04_anteile">
+      <field name="report_id" ref="mis_report_bs_skr04" />
       <field name="name">anteile</field>
       <field name="description">1. Anteile an verb. Untern.</field>
       <field name="expression">bals[080%]</field>
@@ -181,8 +181,8 @@
       <field name="auto_expand_accounts_style_id" ref="style_l10n_de_level3_accounts" />
       <field name="sequence">150</field>
     </record>
-    <record model="mis.report.kpi" id="mis_report_bs_ausleihungen">
-      <field name="report_id" ref="mis_report_bs" />
+    <record model="mis.report.kpi" id="mis_report_bs_skr04_ausleihungen">
+      <field name="report_id" ref="mis_report_bs_skr04" />
       <field name="name">ausleihungen</field>
       <field name="description">2. Ausleihungen an verb. Unt.</field>
       <field name="expression">bals[081%]</field>
@@ -193,8 +193,8 @@
       <field name="auto_expand_accounts_style_id" ref="style_l10n_de_level3_accounts" />
       <field name="sequence">160</field>
     </record>
-    <record model="mis.report.kpi" id="mis_report_bs_beteiligungen">
-      <field name="report_id" ref="mis_report_bs" />
+    <record model="mis.report.kpi" id="mis_report_bs_skr04_beteiligungen">
+      <field name="report_id" ref="mis_report_bs_skr04" />
       <field name="name">beteiligungen</field>
       <field name="description">3. Beteiligungen</field>
       <field name="expression">bals[082%,083%,084%,085%,086%]</field>
@@ -205,8 +205,8 @@
       <field name="auto_expand_accounts_style_id" ref="style_l10n_de_level3_accounts" />
       <field name="sequence">170</field>
     </record>
-    <record model="mis.report.kpi" id="mis_report_bs_ausleihungen_beteiligung">
-      <field name="report_id" ref="mis_report_bs" />
+    <record model="mis.report.kpi" id="mis_report_bs_skr04_ausleihungen_beteiligung">
+      <field name="report_id" ref="mis_report_bs_skr04" />
       <field name="name">ausleihungen_beteiligung</field>
       <field name="description">4. Ausleihungen an Unternehmen mit Beteiligung</field>
       <field name="expression">bals[088%]</field>
@@ -217,8 +217,8 @@
       <field name="auto_expand_accounts_style_id" ref="style_l10n_de_level3_accounts" />
       <field name="sequence">180</field>
     </record>
-    <record model="mis.report.kpi" id="mis_report_bs_wertpapiere_av">
-      <field name="report_id" ref="mis_report_bs" />
+    <record model="mis.report.kpi" id="mis_report_bs_skr04_wertpapiere_av">
+      <field name="report_id" ref="mis_report_bs_skr04" />
       <field name="name">wertpapiere_av</field>
       <field name="description">5. Wertpapiere des Anlagevermögen</field>
       <field name="expression">bals[090%,091%,092%]</field>
@@ -229,8 +229,8 @@
       <field name="auto_expand_accounts_style_id" ref="style_l10n_de_level3_accounts" />
       <field name="sequence">190</field>
     </record>
-    <record model="mis.report.kpi" id="mis_report_bs_sonstige_ausleihungen">
-      <field name="report_id" ref="mis_report_bs" />
+    <record model="mis.report.kpi" id="mis_report_bs_skr04_sonstige_ausleihungen">
+      <field name="report_id" ref="mis_report_bs_skr04" />
       <field name="name">sonstige_ausleihungen</field>
       <field name="description">6. Sonstige Ausleihungen</field>
       <field name="expression">bals[093%,094%,095%,096%,097%,098%,099%]</field>
@@ -241,8 +241,8 @@
       <field name="auto_expand_accounts_style_id" ref="style_l10n_de_level3_accounts" />
       <field name="sequence">200</field>
     </record>
-    <record model="mis.report.kpi" id="mis_report_bs_total_finanzanlagen">
-      <field name="report_id" ref="mis_report_bs" />
+    <record model="mis.report.kpi" id="mis_report_bs_skr04_total_finanzanlagen">
+      <field name="report_id" ref="mis_report_bs_skr04" />
       <field name="name">total_finanzanlagen</field>
       <field name="description">Total III. Finanzanlagen</field>
       <field
@@ -253,8 +253,8 @@
       <field name="style_id" ref="style_l10n_de_level3_total" />
       <field name="sequence">210</field>
     </record>
-    <record model="mis.report.kpi" id="mis_report_bs_total_anlagevermoegen">
-      <field name="report_id" ref="mis_report_bs" />
+    <record model="mis.report.kpi" id="mis_report_bs_skr04_total_anlagevermoegen">
+      <field name="report_id" ref="mis_report_bs_skr04" />
       <field name="name">total_anlagevermoegen</field>
       <field name="description">Total A. Anlagevermögen</field>
       <field
@@ -265,8 +265,8 @@
       <field name="style_id" ref="style_l10n_de_level1_total" />
       <field name="sequence">220</field>
     </record>
-    <record model="mis.report.kpi" id="mis_report_bs_umlaufvermoegen">
-      <field name="report_id" ref="mis_report_bs" />
+    <record model="mis.report.kpi" id="mis_report_bs_skr04_umlaufvermoegen">
+      <field name="report_id" ref="mis_report_bs_skr04" />
       <field name="name">umlaufvermoegen</field>
       <field name="description">B. Umlaufvermögen</field>
       <field name="type">str</field>
@@ -274,8 +274,8 @@
       <field name="style_id" ref="style_l10n_de_level1_green" />
       <field name="sequence">230</field>
     </record>
-    <record model="mis.report.kpi" id="mis_report_bs_i_vorraete">
-      <field name="report_id" ref="mis_report_bs" />
+    <record model="mis.report.kpi" id="mis_report_bs_skr04_i_vorraete">
+      <field name="report_id" ref="mis_report_bs_skr04" />
       <field name="name">i_vorraete</field>
       <field name="description">I. Vorräte</field>
       <field name="type">str</field>
@@ -283,8 +283,8 @@
       <field name="style_id" ref="style_l10n_de_level2" />
       <field name="sequence">240</field>
     </record>
-    <record model="mis.report.kpi" id="mis_report_bs_roh_hilfs_betriebsstoffe">
-      <field name="report_id" ref="mis_report_bs" />
+    <record model="mis.report.kpi" id="mis_report_bs_skr04_roh_hilfs_betriebsstoffe">
+      <field name="report_id" ref="mis_report_bs_skr04" />
       <field name="name">roh_hilfs_betriebsstoffe</field>
       <field name="description">1. Roh-, Hilfs-,Betriebsstoffe</field>
       <field name="expression">bals[100%,101%,102%,103%]</field>
@@ -295,8 +295,8 @@
       <field name="auto_expand_accounts_style_id" ref="style_l10n_de_level3_accounts" />
       <field name="sequence">250</field>
     </record>
-    <record model="mis.report.kpi" id="mis_report_bs_unfertige_leistungen">
-      <field name="report_id" ref="mis_report_bs" />
+    <record model="mis.report.kpi" id="mis_report_bs_skr04_unfertige_leistungen">
+      <field name="report_id" ref="mis_report_bs_skr04" />
       <field name="name">unfertige_leistungen</field>
       <field name="description">2. Unfertige Leistungen</field>
       <field name="expression">bals[104%,105%,106%,107%,108%,109%]</field>
@@ -307,8 +307,8 @@
       <field name="auto_expand_accounts_style_id" ref="style_l10n_de_level3_accounts" />
       <field name="sequence">260</field>
     </record>
-    <record model="mis.report.kpi" id="mis_report_bs_fertige_erzeugnisse">
-      <field name="report_id" ref="mis_report_bs" />
+    <record model="mis.report.kpi" id="mis_report_bs_skr04_fertige_erzeugnisse">
+      <field name="report_id" ref="mis_report_bs_skr04" />
       <field name="name">fertige_erzeugnisse</field>
       <field name="description">3. Fertige Erzeugnisse</field>
       <field name="expression">bals[110%,111%,112%,113%,114%,115%,116%,117%]</field>
@@ -319,8 +319,8 @@
       <field name="auto_expand_accounts_style_id" ref="style_l10n_de_level3_accounts" />
       <field name="sequence">270</field>
     </record>
-    <record model="mis.report.kpi" id="mis_report_bs_anzahlungen">
-      <field name="report_id" ref="mis_report_bs" />
+    <record model="mis.report.kpi" id="mis_report_bs_skr04_anzahlungen">
+      <field name="report_id" ref="mis_report_bs_skr04" />
       <field name="name">anzahlungen</field>
       <field name="description">4. Geleistete Anzahlungen</field>
       <field name="expression">bals[118%]</field>
@@ -331,8 +331,8 @@
       <field name="auto_expand_accounts_style_id" ref="style_l10n_de_level3_accounts" />
       <field name="sequence">280</field>
     </record>
-    <record model="mis.report.kpi" id="mis_report_bs_total_vorraete">
-      <field name="report_id" ref="mis_report_bs" />
+    <record model="mis.report.kpi" id="mis_report_bs_skr04_total_vorraete">
+      <field name="report_id" ref="mis_report_bs_skr04" />
       <field name="name">total_vorraete</field>
       <field name="description">Total I. Vorräte</field>
       <field
@@ -343,8 +343,8 @@
       <field name="style_id" ref="style_l10n_de_level3_total" />
       <field name="sequence">290</field>
     </record>
-    <record model="mis.report.kpi" id="mis_report_bs_ii_forderungen">
-      <field name="report_id" ref="mis_report_bs" />
+    <record model="mis.report.kpi" id="mis_report_bs_skr04_ii_forderungen">
+      <field name="report_id" ref="mis_report_bs_skr04" />
       <field name="name">ii_forderungen</field>
       <field name="description">II. Forderungen u. sonst. Vermögensgegenstände</field>
       <field name="type">str</field>
@@ -352,8 +352,8 @@
       <field name="style_id" ref="style_l10n_de_level2" />
       <field name="sequence">300</field>
     </record>
-    <record model="mis.report.kpi" id="mis_report_bs_forderungen_ll">
-      <field name="report_id" ref="mis_report_bs" />
+    <record model="mis.report.kpi" id="mis_report_bs_skr04_forderungen_ll">
+      <field name="report_id" ref="mis_report_bs_skr04" />
       <field name="name">forderungen_ll</field>
       <field name="description">1. Forderungen aus Lieferungen + Leistungen</field>
       <field name="expression">bals[120%,121%,122%,123%,124%,125%]</field>
@@ -364,8 +364,8 @@
       <field name="auto_expand_accounts_style_id" ref="style_l10n_de_level3_accounts" />
       <field name="sequence">310</field>
     </record>
-    <record model="mis.report.kpi" id="mis_report_bs_forderungen_unternehmen">
-      <field name="report_id" ref="mis_report_bs" />
+    <record model="mis.report.kpi" id="mis_report_bs_skr04_forderungen_unternehmen">
+      <field name="report_id" ref="mis_report_bs_skr04" />
       <field name="name">forderungen_unternehmen</field>
       <field name="description">2. Forderungen gegen verb. Unternehmen</field>
       <field name="expression">bals[126%,127%]</field>
@@ -376,8 +376,8 @@
       <field name="auto_expand_accounts_style_id" ref="style_l10n_de_level3_accounts" />
       <field name="sequence">320</field>
     </record>
-    <record model="mis.report.kpi" id="mis_report_bs_forderungen_beteiligungen">
-      <field name="report_id" ref="mis_report_bs" />
+    <record model="mis.report.kpi" id="mis_report_bs_skr04_forderungen_beteiligungen">
+      <field name="report_id" ref="mis_report_bs_skr04" />
       <field name="name">forderungen_beteiligungen</field>
       <field name="description">3. Forderungen geg. Unt. mit Beteiligung</field>
       <field name="expression">bals[128%,1290%,1291%,1295%,1296%,1297%]</field>
@@ -388,8 +388,11 @@
       <field name="auto_expand_accounts_style_id" ref="style_l10n_de_level3_accounts" />
       <field name="sequence">330</field>
     </record>
-    <record model="mis.report.kpi" id="mis_report_bs_sonstige_vermoegensgegenstaende">
-      <field name="report_id" ref="mis_report_bs" />
+    <record
+        model="mis.report.kpi"
+        id="mis_report_bs_skr04_sonstige_vermoegensgegenstaende"
+    >
+      <field name="report_id" ref="mis_report_bs_skr04" />
       <field name="name">sonstige_vermoegensgegenstaende</field>
       <field name="description">4. Sonstige Vermögensgegenstände</field>
       <field
@@ -402,8 +405,8 @@
       <field name="auto_expand_accounts_style_id" ref="style_l10n_de_level3_accounts" />
       <field name="sequence">340</field>
     </record>
-    <record model="mis.report.kpi" id="mis_report_bs_total_forderungen">
-      <field name="report_id" ref="mis_report_bs" />
+    <record model="mis.report.kpi" id="mis_report_bs_skr04_total_forderungen">
+      <field name="report_id" ref="mis_report_bs_skr04" />
       <field name="name">total_forderungen</field>
       <field
             name="description"
@@ -416,8 +419,8 @@
       <field name="style_id" ref="style_l10n_de_level3_total" />
       <field name="sequence">350</field>
     </record>
-    <record model="mis.report.kpi" id="mis_report_bs_iii_wertpapiere">
-      <field name="report_id" ref="mis_report_bs" />
+    <record model="mis.report.kpi" id="mis_report_bs_skr04_iii_wertpapiere">
+      <field name="report_id" ref="mis_report_bs_skr04" />
       <field name="name">iii_wertpapiere</field>
       <field name="description">III Wertpapiere</field>
       <field name="type">str</field>
@@ -425,8 +428,8 @@
       <field name="style_id" ref="style_l10n_de_level2" />
       <field name="sequence">360</field>
     </record>
-    <record model="mis.report.kpi" id="mis_report_bs_wertpapiere_uv_anteile">
-      <field name="report_id" ref="mis_report_bs" />
+    <record model="mis.report.kpi" id="mis_report_bs_skr04_wertpapiere_uv_anteile">
+      <field name="report_id" ref="mis_report_bs_skr04" />
       <field name="name">wertpapiere_uv_anteile</field>
       <field name="description">1. Anteile an verb. Unternehmen</field>
       <field name="expression">bals[1500%]</field>
@@ -437,8 +440,11 @@
       <field name="auto_expand_accounts_style_id" ref="style_l10n_de_level3_accounts" />
       <field name="sequence">370</field>
     </record>
-    <record model="mis.report.kpi" id="mis_report_bs_wertpapiere_uv_eigene_anteile">
-      <field name="report_id" ref="mis_report_bs" />
+    <record
+        model="mis.report.kpi"
+        id="mis_report_bs_skr04_wertpapiere_uv_eigene_anteile"
+    >
+      <field name="report_id" ref="mis_report_bs_skr04" />
       <field name="name">wertpapiere_uv_eigene_anteile</field>
       <field name="description">2. Eigene Anteile</field>
       <field name="expression">bals[1504%]</field>
@@ -449,8 +455,8 @@
       <field name="auto_expand_accounts_style_id" ref="style_l10n_de_level3_accounts" />
       <field name="sequence">380</field>
     </record>
-    <record model="mis.report.kpi" id="mis_report_bs_wertpapiere_uv_sonstige">
-      <field name="report_id" ref="mis_report_bs" />
+    <record model="mis.report.kpi" id="mis_report_bs_skr04_wertpapiere_uv_sonstige">
+      <field name="report_id" ref="mis_report_bs_skr04" />
       <field name="name">wertpapiere_uv_sonstige</field>
       <field name="description">3. Sonstige Wertpapiere Umlaufverm.</field>
       <field name="expression">bals[151%,152%,153%]</field>
@@ -461,8 +467,8 @@
       <field name="auto_expand_accounts_style_id" ref="style_l10n_de_level3_accounts" />
       <field name="sequence">390</field>
     </record>
-    <record model="mis.report.kpi" id="mis_report_bs_total_wertpapiere_uv">
-      <field name="report_id" ref="mis_report_bs" />
+    <record model="mis.report.kpi" id="mis_report_bs_skr04_total_wertpapiere_uv">
+      <field name="report_id" ref="mis_report_bs_skr04" />
       <field name="name">total_wertpapiere_uv</field>
       <field name="description">Total III. Wertpapiere</field>
       <field
@@ -473,8 +479,8 @@
       <field name="style_id" ref="style_l10n_de_level3_total" />
       <field name="sequence">400</field>
     </record>
-    <record model="mis.report.kpi" id="mis_report_bs_liquide_mittel">
-      <field name="report_id" ref="mis_report_bs" />
+    <record model="mis.report.kpi" id="mis_report_bs_skr04_liquide_mittel">
+      <field name="report_id" ref="mis_report_bs_skr04" />
       <field name="name">liquide_mittel</field>
       <field
             name="description"
@@ -487,8 +493,8 @@
       <field name="auto_expand_accounts_style_id" ref="style_l10n_de_level3_accounts" />
       <field name="sequence">410</field>
     </record>
-    <record model="mis.report.kpi" id="mis_report_bs_total_umlaufvermoegen">
-      <field name="report_id" ref="mis_report_bs" />
+    <record model="mis.report.kpi" id="mis_report_bs_skr04_total_umlaufvermoegen">
+      <field name="report_id" ref="mis_report_bs_skr04" />
       <field name="name">total_umlaufvermoegen</field>
       <field name="description">Total B. Umlaufvermögen</field>
       <field
@@ -499,8 +505,8 @@
       <field name="style_id" ref="style_l10n_de_level1_total" />
       <field name="sequence">420</field>
     </record>
-    <record model="mis.report.kpi" id="mis_report_bs_rechnungsabgrenzung_aktiva">
-      <field name="report_id" ref="mis_report_bs" />
+    <record model="mis.report.kpi" id="mis_report_bs_skr04_rechnungsabgrenzung_aktiva">
+      <field name="report_id" ref="mis_report_bs_skr04" />
       <field name="name">rechnungsabgrenzung_aktiva</field>
       <field name="description">C. Rechnungsabgrenzungsposten</field>
       <field name="type">num</field>
@@ -511,8 +517,8 @@
       <field name="auto_expand_accounts_style_id" ref="style_l10n_de_level3_accounts" />
       <field name="sequence">430</field>
     </record>
-    <record model="mis.report.kpi" id="mis_report_bs_aktive_latente_steuern">
-      <field name="report_id" ref="mis_report_bs" />
+    <record model="mis.report.kpi" id="mis_report_bs_skr04_aktive_latente_steuern">
+      <field name="report_id" ref="mis_report_bs_skr04" />
       <field name="name">aktive_latente_steuern</field>
       <field name="description">D. Aktive latente Steuern</field>
       <field name="type">num</field>
@@ -523,8 +529,11 @@
       <field name="auto_expand_accounts_style_id" ref="style_l10n_de_level3_accounts" />
       <field name="sequence">440</field>
     </record>
-    <record model="mis.report.kpi" id="mis_report_bs_aktiver_unterschied_vermoegen">
-      <field name="report_id" ref="mis_report_bs" />
+    <record
+        model="mis.report.kpi"
+        id="mis_report_bs_skr04_aktiver_unterschied_vermoegen"
+    >
+      <field name="report_id" ref="mis_report_bs_skr04" />
       <field name="name">aktiver_unterschied_vermoegen</field>
       <field
             name="description"
@@ -537,8 +546,8 @@
       <field name="auto_expand_accounts_style_id" ref="style_l10n_de_level3_accounts" />
       <field name="sequence">450</field>
     </record>
-    <record model="mis.report.kpi" id="mis_report_bs_fehlbetrag">
-      <field name="report_id" ref="mis_report_bs" />
+    <record model="mis.report.kpi" id="mis_report_bs_skr04_fehlbetrag">
+      <field name="report_id" ref="mis_report_bs_skr04" />
       <field name="name">fehlbetrag</field>
       <field name="description">F. Nicht d. Eigenkap. ged. Fehlbetrag</field>
       <field name="type">num</field>
@@ -549,8 +558,8 @@
       <field name="auto_expand_accounts_style_id" ref="style_l10n_de_level3_accounts" />
       <field name="sequence">460</field>
     </record>
-    <record model="mis.report.kpi" id="mis_report_bs_aktivseite">
-      <field name="report_id" ref="mis_report_bs" />
+    <record model="mis.report.kpi" id="mis_report_bs_skr04_aktivseite">
+      <field name="report_id" ref="mis_report_bs_skr04" />
       <field name="name">aktiva</field>
       <field name="description">Summe Aktiva (Mittelverwendung)</field>
       <field
@@ -561,8 +570,8 @@
       <field name="style_id" ref="style_l10n_de_level1_total" />
       <field name="sequence">470</field>
     </record>
-    <record model="mis.report.kpi" id="mis_report_bs_eigenkapital">
-      <field name="report_id" ref="mis_report_bs" />
+    <record model="mis.report.kpi" id="mis_report_bs_skr04_eigenkapital">
+      <field name="report_id" ref="mis_report_bs_skr04" />
       <field name="name">eigenkapital</field>
       <field name="description">A. Eigenkapital</field>
       <field name="type">str</field>
@@ -570,8 +579,8 @@
       <field name="style_id" ref="style_l10n_de_level1_red" />
       <field name="sequence">500</field>
     </record>
-    <record model="mis.report.kpi" id="mis_report_bs_gezeichnetes_kapital">
-      <field name="report_id" ref="mis_report_bs" />
+    <record model="mis.report.kpi" id="mis_report_bs_skr04_gezeichnetes_kapital">
+      <field name="report_id" ref="mis_report_bs_skr04" />
       <field name="name">gezeichnetes_kapital</field>
       <field name="description">I. Gezeichnetes Kapital</field>
       <field name="type">num</field>
@@ -582,8 +591,8 @@
       <field name="auto_expand_accounts_style_id" ref="style_l10n_de_level3_accounts" />
       <field name="sequence">510</field>
     </record>
-    <record model="mis.report.kpi" id="mis_report_bs_variables_kapital">
-      <field name="report_id" ref="mis_report_bs" />
+    <record model="mis.report.kpi" id="mis_report_bs_skr04_variables_kapital">
+      <field name="report_id" ref="mis_report_bs_skr04" />
       <field name="name">variables_kapital</field>
       <field name="description">II. Kapitalrücklage</field>
       <field name="type">num</field>
@@ -594,8 +603,8 @@
       <field name="auto_expand_accounts_style_id" ref="style_l10n_de_level3_accounts" />
       <field name="sequence">520</field>
     </record>
-    <record model="mis.report.kpi" id="mis_report_bs_gewinnruecklage">
-      <field name="report_id" ref="mis_report_bs" />
+    <record model="mis.report.kpi" id="mis_report_bs_skr04_gewinnruecklage">
+      <field name="report_id" ref="mis_report_bs_skr04" />
       <field name="name">gewinnruecklage</field>
       <field name="description">III. Gewinnrücklage</field>
       <field name="type">str</field>
@@ -603,8 +612,8 @@
       <field name="style_id" ref="style_l10n_de_level2" />
       <field name="sequence">530</field>
     </record>
-    <record model="mis.report.kpi" id="mis_report_bs_ruecklage_gesetzlich">
-      <field name="report_id" ref="mis_report_bs" />
+    <record model="mis.report.kpi" id="mis_report_bs_skr04_ruecklage_gesetzlich">
+      <field name="report_id" ref="mis_report_bs_skr04" />
       <field name="name">ruecklage_gesetzlich</field>
       <field name="description">1. Gesetzliche Rücklage</field>
       <field name="expression">bals[2930%]</field>
@@ -615,8 +624,8 @@
       <field name="auto_expand_accounts_style_id" ref="style_l10n_de_level3_accounts" />
       <field name="sequence">540</field>
     </record>
-    <record model="mis.report.kpi" id="mis_report_bs_ruecklage_eigene_anteile">
-      <field name="report_id" ref="mis_report_bs" />
+    <record model="mis.report.kpi" id="mis_report_bs_skr04_ruecklage_eigene_anteile">
+      <field name="report_id" ref="mis_report_bs_skr04" />
       <field name="name">ruecklage_eigene_anteile</field>
       <field name="description">2. Rücklage für eigene Anteile</field>
       <field name="expression">bals[2935%]</field>
@@ -627,8 +636,8 @@
       <field name="auto_expand_accounts_style_id" ref="style_l10n_de_level3_accounts" />
       <field name="sequence">550</field>
     </record>
-    <record model="mis.report.kpi" id="mis_report_bs_ruecklage_satzung">
-      <field name="report_id" ref="mis_report_bs" />
+    <record model="mis.report.kpi" id="mis_report_bs_skr04_ruecklage_satzung">
+      <field name="report_id" ref="mis_report_bs_skr04" />
       <field name="name">ruecklage_satzung</field>
       <field name="description">3. Satzungsmässige Rücklagen</field>
       <field name="expression">bals[295%]</field>
@@ -639,8 +648,8 @@
       <field name="auto_expand_accounts_style_id" ref="style_l10n_de_level3_accounts" />
       <field name="sequence">560</field>
     </record>
-    <record model="mis.report.kpi" id="mis_report_bs_ruecklage_andere_gewinne">
-      <field name="report_id" ref="mis_report_bs" />
+    <record model="mis.report.kpi" id="mis_report_bs_skr04_ruecklage_andere_gewinne">
+      <field name="report_id" ref="mis_report_bs_skr04" />
       <field name="name">ruecklage_andere_gewinne</field>
       <field name="description">4. Andere Gewinnrücklagen</field>
       <field name="expression">bals[296%]</field>
@@ -651,8 +660,8 @@
       <field name="auto_expand_accounts_style_id" ref="style_l10n_de_level3_accounts" />
       <field name="sequence">570</field>
     </record>
-    <record model="mis.report.kpi" id="mis_report_bs_total_gewinnruecklage">
-      <field name="report_id" ref="mis_report_bs" />
+    <record model="mis.report.kpi" id="mis_report_bs_skr04_total_gewinnruecklage">
+      <field name="report_id" ref="mis_report_bs_skr04" />
       <field name="name">total_gewinnruecklage</field>
       <field name="description">Total III. Gewinnrücklage</field>
       <field
@@ -663,8 +672,8 @@
       <field name="style_id" ref="style_l10n_de_level1_total" />
       <field name="sequence">580</field>
     </record>
-    <record model="mis.report.kpi" id="mis_report_bs_gewinn_verlustvortrag">
-      <field name="report_id" ref="mis_report_bs" />
+    <record model="mis.report.kpi" id="mis_report_bs_skr04_gewinn_verlustvortrag">
+      <field name="report_id" ref="mis_report_bs_skr04" />
       <field name="name">gewinn_verlustvortrag</field>
       <field name="description">IV. Gewinnvortrag / Verlustvortrag</field>
       <field name="type">num</field>
@@ -675,8 +684,8 @@
       <field name="auto_expand_accounts_style_id" ref="style_l10n_de_level3_accounts" />
       <field name="sequence">590</field>
     </record>
-    <record model="mis.report.kpi" id="mis_report_bs_jahresgewinn_verlust">
-      <field name="report_id" ref="mis_report_bs" />
+    <record model="mis.report.kpi" id="mis_report_bs_skr04_jahresgewinn_verlust">
+      <field name="report_id" ref="mis_report_bs_skr04" />
       <field name="name">jahresgewinn_verlust</field>
       <field name="description">V. Jahresgewinn / Jahresverlust</field>
       <field name="type">num</field>
@@ -687,8 +696,8 @@
       <field name="auto_expand_accounts_style_id" ref="style_l10n_de_level3_accounts" />
       <field name="sequence">600</field>
     </record>
-    <record model="mis.report.kpi" id="mis_report_bs_sopo_mit_ruecklage">
-      <field name="report_id" ref="mis_report_bs" />
+    <record model="mis.report.kpi" id="mis_report_bs_skr04_sopo_mit_ruecklage">
+      <field name="report_id" ref="mis_report_bs_skr04" />
       <field name="name">sopo_mit_ruecklage</field>
       <field name="description">VI. Sonderposten mit Rücklagenanteil</field>
       <field name="type">num</field>
@@ -699,8 +708,8 @@
       <field name="auto_expand_accounts_style_id" ref="style_l10n_de_level3_accounts" />
       <field name="sequence">610</field>
     </record>
-    <record model="mis.report.kpi" id="mis_report_bs_total_eigenkapital">
-      <field name="report_id" ref="mis_report_bs" />
+    <record model="mis.report.kpi" id="mis_report_bs_skr04_total_eigenkapital">
+      <field name="report_id" ref="mis_report_bs_skr04" />
       <field name="name">total_eigenkapital</field>
       <field name="description">Total A. Eigenkapital</field>
       <field
@@ -711,8 +720,8 @@
       <field name="style_id" ref="style_l10n_de_level1_total" />
       <field name="sequence">620</field>
     </record>
-    <record model="mis.report.kpi" id="mis_report_bs_rueckstellungen">
-      <field name="report_id" ref="mis_report_bs" />
+    <record model="mis.report.kpi" id="mis_report_bs_skr04_rueckstellungen">
+      <field name="report_id" ref="mis_report_bs_skr04" />
       <field name="name">rueckstellungen</field>
       <field name="description">B. Rückstellungen</field>
       <field name="type">str</field>
@@ -720,8 +729,8 @@
       <field name="style_id" ref="style_l10n_de_level1_red" />
       <field name="sequence">630</field>
     </record>
-    <record model="mis.report.kpi" id="mis_report_bs_rueckstellungen_pensionen">
-      <field name="report_id" ref="mis_report_bs" />
+    <record model="mis.report.kpi" id="mis_report_bs_skr04_rueckstellungen_pensionen">
+      <field name="report_id" ref="mis_report_bs_skr04" />
       <field name="name">rueckstellungen_pensionen</field>
       <field
             name="description"
@@ -734,8 +743,8 @@
       <field name="auto_expand_accounts_style_id" ref="style_l10n_de_level3_accounts" />
       <field name="sequence">640</field>
     </record>
-    <record model="mis.report.kpi" id="mis_report_bs_rueckstellungen_steuern">
-      <field name="report_id" ref="mis_report_bs" />
+    <record model="mis.report.kpi" id="mis_report_bs_skr04_rueckstellungen_steuern">
+      <field name="report_id" ref="mis_report_bs_skr04" />
       <field name="name">rueckstellungen_steuern</field>
       <field name="description">2. Steuerrückstellungen</field>
       <field name="expression">bals[302%,303%,304%,305%]</field>
@@ -746,8 +755,8 @@
       <field name="auto_expand_accounts_style_id" ref="style_l10n_de_level3_accounts" />
       <field name="sequence">650</field>
     </record>
-    <record model="mis.report.kpi" id="mis_report_bs_rueckstellungen_sonstige">
-      <field name="report_id" ref="mis_report_bs" />
+    <record model="mis.report.kpi" id="mis_report_bs_skr04_rueckstellungen_sonstige">
+      <field name="report_id" ref="mis_report_bs_skr04" />
       <field name="name">rueckstellungen_sonstige</field>
       <field name="description">3. Sonstige Rückstellungen</field>
       <field name="expression">bals[307%,308%,309%]</field>
@@ -758,8 +767,8 @@
       <field name="auto_expand_accounts_style_id" ref="style_l10n_de_level3_accounts" />
       <field name="sequence">660</field>
     </record>
-    <record model="mis.report.kpi" id="mis_report_bs_total_rueckstellungen">
-      <field name="report_id" ref="mis_report_bs" />
+    <record model="mis.report.kpi" id="mis_report_bs_skr04_total_rueckstellungen">
+      <field name="report_id" ref="mis_report_bs_skr04" />
       <field name="name">total_rueckstellungen</field>
       <field name="description">Total B. Rückstellungen</field>
       <field
@@ -770,8 +779,8 @@
       <field name="style_id" ref="style_l10n_de_level1_total" />
       <field name="sequence">670</field>
     </record>
-    <record model="mis.report.kpi" id="mis_report_bs_verbindlichkeiten">
-      <field name="report_id" ref="mis_report_bs" />
+    <record model="mis.report.kpi" id="mis_report_bs_skr04_verbindlichkeiten">
+      <field name="report_id" ref="mis_report_bs_skr04" />
       <field name="name">verbindlichkeiten</field>
       <field name="description">C. Verbindlichkeiten</field>
       <field name="type">str</field>
@@ -779,8 +788,8 @@
       <field name="style_id" ref="style_l10n_de_level1_red" />
       <field name="sequence">680</field>
     </record>
-    <record model="mis.report.kpi" id="mis_report_bs_verbindlichkeiten_anleihen">
-      <field name="report_id" ref="mis_report_bs" />
+    <record model="mis.report.kpi" id="mis_report_bs_skr04_verbindlichkeiten_anleihen">
+      <field name="report_id" ref="mis_report_bs_skr04" />
       <field name="name">verbindlichkeiten_anleihen</field>
       <field name="description">1. Anleihen</field>
       <field name="expression">bals[310%,311%,312%,313%]</field>
@@ -791,8 +800,8 @@
       <field name="auto_expand_accounts_style_id" ref="style_l10n_de_level3_accounts" />
       <field name="sequence">690</field>
     </record>
-    <record model="mis.report.kpi" id="mis_report_bs_verbindlichkeiten_bank">
-      <field name="report_id" ref="mis_report_bs" />
+    <record model="mis.report.kpi" id="mis_report_bs_skr04_verbindlichkeiten_bank">
+      <field name="report_id" ref="mis_report_bs_skr04" />
       <field name="name">verbindlichkeiten_bank</field>
       <field name="description">2. Verbindlichkeiten gegenüb. Kreditinstituten</field>
       <field
@@ -805,8 +814,11 @@
       <field name="auto_expand_accounts_style_id" ref="style_l10n_de_level3_accounts" />
       <field name="sequence">700</field>
     </record>
-    <record model="mis.report.kpi" id="mis_report_bs_verbindlichkeiten_anzahlungen">
-      <field name="report_id" ref="mis_report_bs" />
+    <record
+        model="mis.report.kpi"
+        id="mis_report_bs_skr04_verbindlichkeiten_anzahlungen"
+    >
+      <field name="report_id" ref="mis_report_bs_skr04" />
       <field name="name">verbindlichkeiten_anzahlungen</field>
       <field name="description">3. Erhaltene Anzahlungen auf Bestellungen</field>
       <field name="expression">bals[325%,326%,327%,328%]</field>
@@ -817,8 +829,8 @@
       <field name="auto_expand_accounts_style_id" ref="style_l10n_de_level3_accounts" />
       <field name="sequence">710</field>
     </record>
-    <record model="mis.report.kpi" id="mis_report_bs_verbindlichkeiten_ll">
-      <field name="report_id" ref="mis_report_bs" />
+    <record model="mis.report.kpi" id="mis_report_bs_skr04_verbindlichkeiten_ll">
+      <field name="report_id" ref="mis_report_bs_skr04" />
       <field name="name">verbindlichkeiten_ll</field>
       <field
             name="description"
@@ -831,8 +843,8 @@
       <field name="auto_expand_accounts_style_id" ref="style_l10n_de_level3_accounts" />
       <field name="sequence">720</field>
     </record>
-    <record model="mis.report.kpi" id="mis_report_bs_verbindlichkeiten_wechsel">
-      <field name="report_id" ref="mis_report_bs" />
+    <record model="mis.report.kpi" id="mis_report_bs_skr04_verbindlichkeiten_wechsel">
+      <field name="report_id" ref="mis_report_bs_skr04" />
       <field name="name">verbindlichkeiten_wechsel</field>
       <field
             name="description"
@@ -847,9 +859,9 @@
     </record>
     <record
         model="mis.report.kpi"
-        id="mis_report_bs_verbindlichkeiten_verbundene_unternehmen"
+        id="mis_report_bs_skr04_verbindlichkeiten_verbundene_unternehmen"
     >
-      <field name="report_id" ref="mis_report_bs" />
+      <field name="report_id" ref="mis_report_bs_skr04" />
       <field name="name">verbindlichkeiten_verb_unt</field>
       <field name="description">6. Verbindlichkeiten geg. verb. Unternehmen</field>
       <field name="expression">bals[340%,341%,342%,343%]</field>
@@ -862,9 +874,9 @@
     </record>
     <record
         model="mis.report.kpi"
-        id="mis_report_bs_verbindlichkeiten_unternehmen_mit_beteiligung"
+        id="mis_report_bs_skr04_verbindlichkeiten_unternehmen_mit_beteiligung"
     >
-      <field name="report_id" ref="mis_report_bs" />
+      <field name="report_id" ref="mis_report_bs_skr04" />
       <field name="name">verbindlichkeiten_bet_unt</field>
       <field
             name="description"
@@ -877,8 +889,8 @@
       <field name="auto_expand_accounts_style_id" ref="style_l10n_de_level3_accounts" />
       <field name="sequence">750</field>
     </record>
-    <record model="mis.report.kpi" id="mis_report_bs_verbindlichkeiten_sonstige">
-      <field name="report_id" ref="mis_report_bs" />
+    <record model="mis.report.kpi" id="mis_report_bs_skr04_verbindlichkeiten_sonstige">
+      <field name="report_id" ref="mis_report_bs_skr04" />
       <field name="name">verbindlichkeiten_sonstige</field>
       <field
             name="description"
@@ -893,8 +905,8 @@
       <field name="auto_expand_accounts_style_id" ref="style_l10n_de_level3_accounts" />
       <field name="sequence">760</field>
     </record>
-    <record model="mis.report.kpi" id="mis_report_bs_total_verbindlichkeiten">
-      <field name="report_id" ref="mis_report_bs" />
+    <record model="mis.report.kpi" id="mis_report_bs_skr04_total_verbindlichkeiten">
+      <field name="report_id" ref="mis_report_bs_skr04" />
       <field name="name">total_verbindlichkeiten</field>
       <field name="description">Total C. Verbindlichkeiten</field>
       <field
@@ -905,8 +917,8 @@
       <field name="style_id" ref="style_l10n_de_level1_total" />
       <field name="sequence">770</field>
     </record>
-    <record model="mis.report.kpi" id="mis_report_bs_rechnungsabgrenzung_passiva">
-      <field name="report_id" ref="mis_report_bs" />
+    <record model="mis.report.kpi" id="mis_report_bs_skr04_rechnungsabgrenzung_passiva">
+      <field name="report_id" ref="mis_report_bs_skr04" />
       <field name="name">rechnungsabgrenzung_passiva</field>
       <field name="description">D. Rechnungsabgrenzungsposten</field>
       <field name="type">num</field>
@@ -917,8 +929,8 @@
       <field name="auto_expand_accounts_style_id" ref="style_l10n_de_level3_accounts" />
       <field name="sequence">780</field>
     </record>
-    <record model="mis.report.kpi" id="mis_report_bs_passive_latente_steuern">
-      <field name="report_id" ref="mis_report_bs" />
+    <record model="mis.report.kpi" id="mis_report_bs_skr04_passive_latente_steuern">
+      <field name="report_id" ref="mis_report_bs_skr04" />
       <field name="name">passive_latente_steuern</field>
       <field name="description">E. Passive latente Steuern</field>
       <field name="type">num</field>
@@ -929,8 +941,8 @@
       <field name="auto_expand_accounts_style_id" ref="style_l10n_de_level3_accounts" />
       <field name="sequence">790</field>
     </record>
-    <record model="mis.report.kpi" id="mis_report_bs_passivseite">
-      <field name="report_id" ref="mis_report_bs" />
+    <record model="mis.report.kpi" id="mis_report_bs_skr04_passivseite">
+      <field name="report_id" ref="mis_report_bs_skr04" />
       <field name="name">passiva</field>
       <field name="description">Summe Passiva (Mittelherkunft)</field>
       <field

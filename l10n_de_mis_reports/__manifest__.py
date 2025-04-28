@@ -5,7 +5,7 @@
     "name": "German MIS Builder templates",
     "summary": """
         MIS Builder templates for the German P&L
-        and Balance Sheets (SKR04)""",
+        and Balance Sheets (SKR03 + SKR04)""",
     "author": "OpenBIG.org," "ACSONE SA/NV," "Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/l10n-germany",
     "category": "Reporting",
@@ -17,8 +17,10 @@
     ],
     "data": [
         "data/mis_report_styles.xml",
-        "data/mis_report_pl.xml",
-        "data/mis_report_bs.xml",
+        "data/mis_report_pl_skr03.xml",
+        "data/mis_report_pl_skr04.xml",
+        "data/mis_report_bs_skr03.xml",
+        "data/mis_report_bs_skr04.xml",
     ],
     "installable": True,
 }
