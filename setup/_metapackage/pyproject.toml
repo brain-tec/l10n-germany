@@ -1,7 +1,8 @@
 [project]
 name = "odoo-addons-oca-l10n-germany"
-version = "17.0.20250430.0"
+version = "17.0.20250507.0"
 dependencies = [
+    "odoo-addon-datev_export>=17.0dev,<17.1dev",
     "odoo-addon-datev_import_csv_dtvf>=17.0dev,<17.1dev",
     "odoo-addon-l10n_de_mis_reports>=17.0dev,<17.1dev",
 ]
