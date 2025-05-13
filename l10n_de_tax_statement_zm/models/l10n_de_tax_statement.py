@@ -203,7 +203,7 @@ class VatStatement(models.Model):
             ",".join(str(i) for i in line)
             for line in self._generate_zm_download_lines()
         )
-        zm_download_base64 = base64.b64encode(zm_download.encode("iso-8859-15"))
+        zm_download_base64 = base64.b64encode(zm_download.encode())
         attachment_id = self.env["ir.attachment"].create(
             {
                 "name": "{}.csv".format(self.name),
