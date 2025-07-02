@@ -3,7 +3,6 @@
      Copyright 2019 BIG-Consulting (<http://www.openbig.org>)
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
-
     <record id="view_l10n_de_tax_report_form" model="ir.ui.view">
         <field name="model">l10n.de.tax.statement</field>
         <field
@@ -21,7 +20,7 @@
                         <div
                             states="posted"
                         >Press the Update button in order to recompute the lines!</div>
-                            <button
+                        <button
                             name="zm_update"
                             string="Update"
                             states="posted"
@@ -29,7 +28,7 @@
                             class="oe_stat_button"
                             icon="fa-repeat"
                         />
-                            <button
+                        <button
                             name="zm_download"
                             string="Download.CSV"
                             states="posted"
@@ -49,8 +48,7 @@
                         </tree>
                     </field>
                     <group>
-                        <group>
-                        </group>
+                        <group />
                         <group>
                             <label for="zm_total" />
                             <field name="zm_total" nolabel="1" />
@@ -60,5 +58,4 @@
             </xpath>
         </field>
     </record>
-
 </odoo>

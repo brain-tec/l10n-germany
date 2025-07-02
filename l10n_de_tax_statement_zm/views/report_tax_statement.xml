@@ -3,7 +3,6 @@
      Copyright 2019 BIG-Consulting (<http://www.openbig.org>)
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
-
     <record id="action_report_tax_statement_zm" model="ir.actions.report">
         <field name="name">Zusammenfassende Meldung</field>
         <field name="model">l10n.de.tax.statement</field>
@@ -19,5 +18,4 @@
             ref="l10n_de_tax_statement.paperformat_de_tax_statement"
         />
     </record>
-
 </odoo>
