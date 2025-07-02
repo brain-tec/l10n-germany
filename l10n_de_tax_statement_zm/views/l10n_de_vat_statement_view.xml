@@ -36,12 +36,12 @@
                 >
                     <group name="zm_lines" string="Zusammenfassende Meldung Positionen">
                         <div
-                            states="posted"
-                            colspan="2"
-                            class="text-info"
-                        >Press the <span class="text-uppercase"><i
-                                    class="fa fa-repeat"
-                                /> Update</span> button in order to recompute the statement lines!</div>
+                        states="posted"
+                        colspan="2"
+                        class="text-info"
+                    >Press the <span class="text-uppercase"><i
+                        class="fa fa-repeat"
+                    /> Update</span> button in order to recompute the statement lines!</div>
 >>>>>>> 9b6bba2 ([MIG] 16.0 l10n_de_tax_statement_zm - Migration to 16.0)
                     </group>
                     <field name="zm_line_ids">
