@@ -3,18 +3,18 @@
 
 from odoo import fields
 from odoo.exceptions import UserError, ValidationError
-from odoo.tests import Form
-from odoo.tests.common import TransactionCase
+from odoo.tests import Form, tagged
+
+from odoo.addons.base.tests.common import BaseCommon
 
 
-class TestTaxStatementZM(TransactionCase):
+@tagged("-at_install", "post_install")
+class TestTaxStatementZM(BaseCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
 
         cls.eur = cls.env["res.currency"].search([("name", "=", "EUR")])
-        cls.coa = cls.env.ref("l10n_de_skr03.l10n_de_chart_template", False)
-        cls.coa = cls.coa or cls.env.ref("l10n_generic_coa.configurable_chart_template")
         cls.company_parent = cls.env["res.company"].create(
             {
                 "name": "Parent Company",
@@ -23,7 +23,9 @@ class TestTaxStatementZM(TransactionCase):
             }
         )
         cls.env.user.company_id = cls.company_parent
-        cls.coa.try_loading()
+        cls.env["account.chart.template"].try_loading(
+            "de_skr03", company=cls.company_parent, install_demo=False
+        )
         cls.env["l10n.de.tax.statement"].search([("state", "!=", "posted")]).unlink()
 
         cls.tag_1 = cls.env["account.account.tag"].create(
@@ -42,13 +44,6 @@ class TestTaxStatementZM(TransactionCase):
         )
         cls.tag_3 = cls.env["account.account.tag"].create(
             {
-                "name": "+81 base",
-                "applicability": "taxes",
-                "country_id": cls.env.ref("base.de").id,
-            }
-        )
-        cls.tag_4 = cls.env["account.account.tag"].create(
-            {
                 "name": "+21 base",
                 "applicability": "taxes",
                 "country_id": cls.env.ref("base.de").id,
@@ -60,8 +55,8 @@ class TestTaxStatementZM(TransactionCase):
         cls.tax_1.invoice_repartition_line_ids[1].tag_ids = cls.tag_2
 
         cls.tax_2 = cls.env["account.tax"].create({"name": "Tax 2", "amount": 7})
-        cls.tax_2.invoice_repartition_line_ids[0].tag_ids = cls.tag_3
-        cls.tax_2.invoice_repartition_line_ids[1].tag_ids = cls.tag_4
+        cls.tax_2.invoice_repartition_line_ids[0].tag_ids = cls.tag_1
+        cls.tax_2.invoice_repartition_line_ids[1].tag_ids = cls.tag_3
 
         cls.statement_1 = cls.env["l10n.de.tax.statement"].create(
             {"name": "Statement 1", "version": "2021"}
@@ -194,7 +189,7 @@ class TestTaxStatementZM(TransactionCase):
         for invoice_line in invoice.invoice_line_ids:
             for tax_line in invoice_line.tax_ids:
                 for rep_line in tax_line.invoice_repartition_line_ids:
-                    rep_line.tag_ids = self.tag_4
+                    rep_line.tag_ids = self.tag_3
         invoice.action_post()
         self.statement_with_zm.statement_update()
 

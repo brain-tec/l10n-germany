@@ -2,7 +2,7 @@
 # Copyright 2018 Onestein (<http://www.onestein.eu>)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 from odoo.tools.misc import formatLang
 
@@ -35,8 +35,8 @@ class VatStatementZmLine(models.Model):
     @api.depends("amount_products", "amount_services")
     def _compute_zm_amount_format(self):
         for line in self:
-            amount_products = formatLang(self.env, line.amount_products, monetary=True)
-            amount_services = formatLang(self.env, line.amount_services, monetary=True)
+            amount_products = formatLang(self.env, line.amount_products)
+            amount_services = formatLang(self.env, line.amount_services)
             line.format_amount_products = amount_products
             line.format_amount_services = amount_services
 
@@ -48,7 +48,7 @@ class VatStatementZmLine(models.Model):
             country_codes = line.mapped("country_code")
             if de_code in country_codes:
                 raise ValidationError(
-                    _(
+                    self.env._(
                         "Wrong country code (DE) for ZM report"
                         ' at partner "{partner}" ({ref}) with vat "{vat}".'
                     ).format(
@@ -58,9 +58,9 @@ class VatStatementZmLine(models.Model):
                     )
                 )
             for code in country_codes:
-                if code not in europe_codes:
+                if code and code not in europe_codes:
                     raise ValidationError(
-                        _(
+                        self.env._(
                             "Wrong country code ({code}) for ZM report"
                             ' at partner "{partner}" ({ref}) with vat "{vat}". '
                             "Please check your configuration."

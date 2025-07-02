@@ -3,7 +3,7 @@
 
 import base64
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError
 
 
@@ -150,7 +150,7 @@ class VatStatement(models.Model):
         self.ensure_one()
 
         if self.state in ["final"]:
-            raise UserError(_("You cannot modify a final statement!"))
+            raise UserError(self.env._("You cannot modify a final statement!"))
 
         # clean old lines
         self.zm_line_ids.unlink()
@@ -170,7 +170,7 @@ class VatStatement(models.Model):
         for zml in self.zm_line_ids:
             if not zml.vat:
                 raise UserError(
-                    _("Partner {} has no vat id!").format(zml.partner_id.name)
+                    self.env._("Partner {} has no vat id!").format(zml.partner_id.name)
                 )
             vat = zml.vat.replace(" ", "").replace("-", "")
             if vat not in res:
@@ -183,7 +183,9 @@ class VatStatement(models.Model):
                 res[vat]["2_amount_products"] += zml.amount_products
                 res[vat]["3_amount_services"] += zml.amount_services
         lines = [
-            ["Laenderkennzeichen", "USt-IdNr.", "Betrag(Euro)", "Art der Leistung"]
+            ["#v3.0"],
+            ["#ve3.2.1"],
+            ["Umsatzsteuer-Identifikationsnummer", "Betrag (Euro)", "Art der Leistung"],
         ]
         for vat in res:
             v = res[vat]
@@ -205,11 +207,13 @@ class VatStatement(models.Model):
         )
         zm_download_base64 = base64.b64encode(zm_download.encode())
         attachment_id = self.env["ir.attachment"].create(
-            {
-                "name": f"{self.name}.csv",
-                "datas": zm_download_base64,
-                "public": True,
-            }
+            [
+                {
+                    "name": f"{self.name}.csv",
+                    "datas": zm_download_base64,
+                    "public": True,
+                }
+            ]
         )
         return {
             "type": "ir.actions.act_url",

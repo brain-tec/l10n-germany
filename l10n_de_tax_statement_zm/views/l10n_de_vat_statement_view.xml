@@ -14,7 +14,7 @@
                 <button
                     name="zm_update"
                     string="Update"
-                    states="posted"
+                    invisible="state != 'posted'"
                     type="object"
                     class="oe_stat_button"
                     icon="fa-repeat"
@@ -22,7 +22,7 @@
                 <button
                     name="zm_download"
                     string="Download CSV"
-                    states="posted,final"
+                    invisible="state not in ('posted','final')"
                     type="object"
                     class="oe_stat_button"
                     icon="fa-download"
@@ -32,27 +32,26 @@
                 <page
                     name="zm_statement"
                     string="Zusammenfassende Meldung"
-                    attrs="{'invisible':[('state','=','draft')]}"
+                    invisible="state == 'draft'"
                 >
                     <group name="zm_lines" string="Zusammenfassende Meldung Positionen">
                         <div
-                        states="posted"
-                        colspan="2"
-                        class="text-info"
-                    >Press the <span class="text-uppercase"><i
-                        class="fa fa-repeat"
-                    /> Update</span> button in order to recompute the statement lines!</div>
->>>>>>> 9b6bba2 ([MIG] 16.0 l10n_de_tax_statement_zm - Migration to 16.0)
+                            invisible="state != 'posted'"
+                            colspan="2"
+                            class="text-info"
+                        >Press the <span class="text-uppercase"><i
+                            class="fa fa-repeat"
+                        /> Update</span> button in order to recompute the statement lines!</div>
                     </group>
                     <field name="zm_line_ids">
-                        <tree editable="bottom" create="false" delete="false">
+                        <list editable="bottom" create="false" delete="false">
                             <field name="partner_id" />
                             <field name="vat" />
                             <field name="country_code" />
                             <field name="currency_id" />
                             <field name="amount_products" />
                             <field name="amount_services" />
-                        </tree>
+                        </list>
                     </field>
                     <group>
                         <group />
