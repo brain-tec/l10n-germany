@@ -11,32 +11,38 @@
             ref="l10n_de_tax_statement.view_l10n_de_tax_report_form"
         />
         <field name="arch" type="xml">
+             <button name="statement_update" position="after">
+                <button
+                    name="zm_update"
+                    string="Update"
+                    invisible="state != 'posted'"
+                    type="object"
+                    class="oe_stat_button"
+                    icon="fa-repeat"
+                />
+                <button
+                    name="zm_download"
+                    string="Download CSV"
+                    invisible="state not in ('posted','final')"
+                    type="object"
+                    class="oe_stat_button"
+                    icon="fa-download"
+                />
+            </button>
             <xpath expr="//notebook" position="inside">
                 <page
                     name="zm_statement"
                     string="Zusammenfassende Meldung"
-                    attrs="{'invisible':[('state','=','draft')]}"
+                    invisible="state == 'draft'"
                 >
                     <group name="zm_lines" string="Zusammenfassende Meldung Positionen">
                         <div
-                            states="posted"
-                        >Press the Update button in order to recompute the lines!</div>
-                            <button
-                            name="zm_update"
-                            string="Update"
-                            states="posted"
-                            type="object"
-                            class="oe_stat_button"
-                            icon="fa-repeat"
-                        />
-                            <button
-                            name="zm_download"
-                            string="Download.CSV"
-                            states="posted"
-                            type="object"
-                            class="oe_stat_button"
-                            icon="fa-download"
-                        />
+                            invisible="state != 'posted'"
+                            colspan="2"
+                            class="text-info"
+                        >Press the <span class="text-uppercase"><i
+                                    class="fa fa-repeat"
+                                /> Update</span> button in order to recompute the statement lines!</div>
                     </group>
                     <field name="zm_line_ids">
                         <tree editable="bottom" create="false" delete="false">
@@ -49,8 +55,7 @@
                         </tree>
                     </field>
                     <group>
-                        <group>
-                        </group>
+                        <group />
                         <group>
                             <label for="zm_total" />
                             <field name="zm_total" nolabel="1" />

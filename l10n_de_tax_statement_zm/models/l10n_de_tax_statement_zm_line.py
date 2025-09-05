@@ -17,12 +17,10 @@ class VatStatementZmLine(models.Model):
     )
     partner_id = fields.Many2one(
         "res.partner",
-        string="Partner",
         readonly=True,
         required=True,
     )
     vat = fields.Char(
-        string="VAT",
         readonly=True,
     )
     country_code = fields.Char(
@@ -60,7 +58,7 @@ class VatStatementZmLine(models.Model):
                     )
                 )
             for code in country_codes:
-                if code not in europe_codes:
+                if code and code not in europe_codes:
                     raise ValidationError(
                         _(
                             "Wrong country code ({code}) for ZM report"

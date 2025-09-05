@@ -11,20 +11,18 @@ class TestTaxStatementZM(TransactionCase):
     def setUp(self):
         super().setUp()
 
-        self.eur = self.env["res.currency"].search([("name", "=", "EUR")])
-        self.coa = self.env.ref("l10n_de_skr03.l10n_de_chart_template", False)
-        self.coa = self.coa or self.env.ref(
-            "l10n_generic_coa.configurable_chart_template"
-        )
+        self.eur = self.env.ref("base.EUR")
+        country_de = self.env.ref("base.de")
         self.company_parent = self.env["res.company"].create(
             {
-                "name": "Parent Company",
-                "country_id": self.env.ref("base.de").id,
+                "name": "Test Company",
+                "country_id": country_de.id,
                 "currency_id": self.eur.id,
             }
         )
-        self.env.user.company_id = self.company_parent
-        self.coa.try_loading()
+        self.env.company = self.company_parent
+        template = self.env["account.chart.template"]
+        template.try_loading("de_skr03", self.env.company)
         self.env["l10n.de.tax.statement"].search([("state", "!=", "posted")]).unlink()
 
         self.tag_1 = self.env["account.account.tag"].create(
@@ -43,60 +41,57 @@ class TestTaxStatementZM(TransactionCase):
         )
         self.tag_3 = self.env["account.account.tag"].create(
             {
-                "name": "+81 base",
-                "applicability": "taxes",
-                "country_id": self.env.ref("base.de").id,
-            }
-        )
-        self.tag_4 = self.env["account.account.tag"].create(
-            {
                 "name": "+21 base",
                 "applicability": "taxes",
                 "country_id": self.env.ref("base.de").id,
             }
         )
 
-        self.tax_1 = self.env["account.tax"].create({"name": "Tax 1", "amount": 19})
+        self.tax_1 = self.env["account.tax"].create(
+            {"name": "Tax 1", "amount": 19, "company_id": self.company_parent.id}
+        )
         self.tax_1.invoice_repartition_line_ids[0].tag_ids = self.tag_1
         self.tax_1.invoice_repartition_line_ids[1].tag_ids = self.tag_2
 
-        self.tax_2 = self.env["account.tax"].create({"name": "Tax 2", "amount": 7})
-        self.tax_2.invoice_repartition_line_ids[0].tag_ids = self.tag_3
-        self.tax_2.invoice_repartition_line_ids[1].tag_ids = self.tag_4
+        self.tax_2 = self.env["account.tax"].create(
+            {"name": "Tax 2", "amount": 7, "company_id": self.company_parent.id}
+        )
+        self.tax_2.invoice_repartition_line_ids[0].tag_ids = self.tag_1
+        self.tax_2.invoice_repartition_line_ids[1].tag_ids = self.tag_3
 
         self.statement_1 = self.env["l10n.de.tax.statement"].create(
             {"name": "Statement 1", "version": "2021"}
         )
 
     def _create_test_invoice(self, products=True, services=True):
+        self.partner = self.env["res.partner"].create({"name": "Test partner"})
+        account_receivable = self.env["account.account"].create(
+            {
+                "account_type": "expense",
+                "code": "EXPTEST",
+                "name": "Test expense account",
+            }
+        )
         self.journal_1 = self.env["account.journal"].create(
             {
                 "name": "Journal 1",
                 "code": "Jou1",
                 "type": "sale",
+                "default_account_id": account_receivable.id,
             }
         )
-        self.partner = self.env["res.partner"].create({"name": "Test partner"})
-
-        account_receivable = self.env["account.account"].create(
-            {
-                "user_type_id": self.env.ref("account.data_account_type_expenses").id,
-                "code": "EXPTEST",
-                "name": "Test expense account",
-            }
-        )
-
         invoice_form = Form(
-            self.env["account.move"].with_context(default_move_type="out_invoice"),
+            self.env["account.move"].with_context(
+                default_move_type="out_invoice",
+                default_journal_id=self.journal_1.id,
+            ),
         )
         invoice_form.partner_id = self.partner
-        invoice_form.journal_id = self.journal_1
         invoice_form.invoice_date = fields.Date.today()
         if products:
             with invoice_form.invoice_line_ids.new() as line:
                 line.name = "Test line 1"
                 line.quantity = 1.0
-                line.account_id = account_receivable
                 line.price_unit = 100.0
                 line.tax_ids.clear()
                 line.tax_ids.add(self.tax_1)
@@ -104,7 +99,6 @@ class TestTaxStatementZM(TransactionCase):
             with invoice_form.invoice_line_ids.new() as line:
                 line.name = "Test line 2"
                 line.quantity = 1.0
-                line.account_id = account_receivable
                 line.price_unit = 50.0
                 line.tax_ids.clear()
                 line.tax_ids.add(self.tax_2)
@@ -191,8 +185,7 @@ class TestTaxStatementZM(TransactionCase):
         for invoice_line in invoice.invoice_line_ids:
             for tax_line in invoice_line.tax_ids:
                 for rep_line in tax_line.invoice_repartition_line_ids:
-                    rep_line.tag_ids = self.tag_4
-        invoice._onchange_invoice_line_ids()
+                    rep_line.tag_ids = self.tag_3
         invoice.action_post()
         self.statement_with_zm.statement_update()
 
