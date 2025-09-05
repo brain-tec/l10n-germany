@@ -128,19 +128,19 @@ class VatStatement(models.Model):
         """Removes ZM lines if reset to draft"""
         for statement in self:
             statement.zm_line_ids.unlink()
-        return super(VatStatement, self).reset()
+        return super().reset()
 
     def post(self):
         """Checks configuration when validating the statement"""
         self.ensure_one()
-        res = super(VatStatement, self).post()
+        res = super().post()
         self._compute_zm_lines()
         return res
 
     @api.model
     def _modifiable_values_when_posted(self):
         """Returns the modifiable fields even when the statement is posted"""
-        res = super(VatStatement, self)._modifiable_values_when_posted()
+        res = super()._modifiable_values_when_posted()
         res.append("zm_line_ids")
         res.append("zm_total")
         return res
@@ -206,14 +206,14 @@ class VatStatement(models.Model):
         zm_download_base64 = base64.b64encode(zm_download.encode())
         attachment_id = self.env["ir.attachment"].create(
             {
-                "name": "{}.csv".format(self.name),
+                "name": f"{self.name}.csv",
                 "datas": zm_download_base64,
                 "public": True,
             }
         )
         return {
             "type": "ir.actions.act_url",
-            "url": "/web/content/{}?download=true".format(attachment_id.id),
+            "url": f"/web/content/{attachment_id.id}?download=true",
             "target": "new",
             "nodestroy": False,
         }
