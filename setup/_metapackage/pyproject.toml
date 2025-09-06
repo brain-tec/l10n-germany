@@ -1,8 +1,9 @@
 [project]
 name = "odoo-addons-oca-l10n-germany"
-version = "18.0.20250606.0"
+version = "18.0.20250905.0"
 dependencies = [
     "odoo-addon-datev_import_csv_dtvf==18.0.*",
+    "odoo-addon-l10n_de_location_nuts==18.0.*",
 ]
 classifiers=[
     "Programming Language :: Python",
