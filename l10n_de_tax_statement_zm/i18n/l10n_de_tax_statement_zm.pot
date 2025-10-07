@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 14.0\n"
+"Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -61,14 +61,13 @@ msgid "Currency"
 msgstr ""
 
 #. module: l10n_de_tax_statement_zm
-#: model:ir.model.fields,field_description:l10n_de_tax_statement_zm.field_l10n_de_tax_statement__display_name
 #: model:ir.model.fields,field_description:l10n_de_tax_statement_zm.field_l10n_de_tax_statement_zm_line__display_name
 msgid "Display Name"
 msgstr ""
 
 #. module: l10n_de_tax_statement_zm
 #: model_terms:ir.ui.view,arch_db:l10n_de_tax_statement_zm.view_l10n_de_tax_report_form
-msgid "Download.CSV"
+msgid "Download CSV"
 msgstr ""
 
 #. module: l10n_de_tax_statement_zm
@@ -87,7 +86,6 @@ msgid "German Vat Statement"
 msgstr ""
 
 #. module: l10n_de_tax_statement_zm
-#: model:ir.model.fields,field_description:l10n_de_tax_statement_zm.field_l10n_de_tax_statement__id
 #: model:ir.model.fields,field_description:l10n_de_tax_statement_zm.field_l10n_de_tax_statement_zm_line__id
 msgid "ID"
 msgstr ""
@@ -95,12 +93,6 @@ msgstr ""
 #. module: l10n_de_tax_statement_zm
 #: model:ir.model,name:l10n_de_tax_statement_zm.model_l10n_de_tax_statement_zm_line
 msgid "Intra-Community transactions (ZM) line"
-msgstr ""
-
-#. module: l10n_de_tax_statement_zm
-#: model:ir.model.fields,field_description:l10n_de_tax_statement_zm.field_l10n_de_tax_statement____last_update
-#: model:ir.model.fields,field_description:l10n_de_tax_statement_zm.field_l10n_de_tax_statement_zm_line____last_update
-msgid "Last Modified on"
 msgstr ""
 
 #. module: l10n_de_tax_statement_zm
@@ -120,6 +112,7 @@ msgid "Partner"
 msgstr ""
 
 #. module: l10n_de_tax_statement_zm
+#. odoo-python
 #: code:addons/l10n_de_tax_statement_zm/models/l10n_de_tax_statement.py:0
 #, python-format
 msgid "Partner {} has no vat id!"
@@ -127,7 +120,9 @@ msgstr ""
 
 #. module: l10n_de_tax_statement_zm
 #: model_terms:ir.ui.view,arch_db:l10n_de_tax_statement_zm.view_l10n_de_tax_report_form
-msgid "Press the Update button in order to recompute the lines!"
+msgid ""
+"Press the <span class=\"text-uppercase\"><i class=\"fa fa-repeat\"/> "
+"Update</span> button in order to recompute the statement lines!"
 msgstr ""
 
 #. module: l10n_de_tax_statement_zm
@@ -156,12 +151,17 @@ msgid "Update"
 msgstr ""
 
 #. module: l10n_de_tax_statement_zm
-#: model:ir.model.fields,field_description:l10n_de_tax_statement_zm.field_l10n_de_tax_statement_zm_line__vat
 #: model_terms:ir.ui.view,arch_db:l10n_de_tax_statement_zm.report_tax_statement_zm
 msgid "VAT"
 msgstr ""
 
 #. module: l10n_de_tax_statement_zm
+#: model:ir.model.fields,field_description:l10n_de_tax_statement_zm.field_l10n_de_tax_statement_zm_line__vat
+msgid "Vat"
+msgstr ""
+
+#. module: l10n_de_tax_statement_zm
+#. odoo-python
 #: code:addons/l10n_de_tax_statement_zm/models/l10n_de_tax_statement_zm_line.py:0
 #, python-format
 msgid ""
@@ -170,6 +170,7 @@ msgid ""
 msgstr ""
 
 #. module: l10n_de_tax_statement_zm
+#. odoo-python
 #: code:addons/l10n_de_tax_statement_zm/models/l10n_de_tax_statement_zm_line.py:0
 #, python-format
 msgid ""
@@ -178,6 +179,7 @@ msgid ""
 msgstr ""
 
 #. module: l10n_de_tax_statement_zm
+#. odoo-python
 #: code:addons/l10n_de_tax_statement_zm/models/l10n_de_tax_statement.py:0
 #, python-format
 msgid "You cannot modify a final statement!"
