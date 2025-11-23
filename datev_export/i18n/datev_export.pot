@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -14,22 +14,9 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: datev_export
-#: model_terms:ir.ui.view,arch_db:datev_export.res_config_settings_view_form
-msgid ""
-"<span class=\"o_form_label\">Client Number</span>\n"
-"                                <span class=\"fa fa-lg fa-building-o\" title=\"Values set here are company-specific.\" aria-label=\"Values set here are company-specific.\" groups=\"base.group_multi_company\"/>"
-msgstr ""
-
-#. module: datev_export
-#: model_terms:ir.ui.view,arch_db:datev_export.res_config_settings_view_form
-msgid ""
-"<span class=\"o_form_label\">Consultant Number</span>\n"
-"                                <span class=\"fa fa-lg fa-building-o\" title=\"Values set here are company-specific.\" aria-label=\"Values set here are company-specific.\" groups=\"base.group_multi_company\"/>"
-msgstr ""
-
-#. module: datev_export
 #: model:ir.model.fields,field_description:datev_export.field_res_company__datev_client_number
 #: model:ir.model.fields,field_description:datev_export.field_res_config_settings__datev_client_number
+#: model_terms:ir.ui.view,arch_db:datev_export.res_config_settings_view_form
 msgid "Client Number"
 msgstr ""
 
@@ -46,6 +33,7 @@ msgstr ""
 #. module: datev_export
 #: model:ir.model.fields,field_description:datev_export.field_res_company__datev_consultant_number
 #: model:ir.model.fields,field_description:datev_export.field_res_config_settings__datev_consultant_number
+#: model_terms:ir.ui.view,arch_db:datev_export.res_config_settings_view_form
 msgid "Consultant Number"
 msgstr ""
 
@@ -70,4 +58,9 @@ msgstr ""
 #: model:ir.model.fields,help:datev_export.field_res_company__datev_consultant_number
 #: model:ir.model.fields,help:datev_export.field_res_config_settings__datev_consultant_number
 msgid "Number from 1000 to 99999999"
+msgstr ""
+
+#. module: datev_export
+#: model_terms:ir.ui.view,arch_db:datev_export.res_config_settings_view_form
+msgid "Values set here are company-specific."
 msgstr ""
