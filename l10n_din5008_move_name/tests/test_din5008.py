@@ -1,5 +1,7 @@
 # Copyright 2025 Dixmit
+# Copyright 2026 Michael Tietz (MT Software) <mtietz@mt-software.de>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+import re
 
 from odoo.addons.base.tests.common import BaseCommon
 
@@ -9,6 +11,9 @@ class TestDatevExport(BaseCommon):
     def setUpClass(cls):
         super().setUpClass()
         cls.company = cls.env.company
+        cls.company.external_report_layout_id = cls.env.ref(
+            "l10n_din5008.report_layout_din5008"
+        ).view_id
         cls.JournalObj = cls.env["account.journal"]
         cls.sale_journal = cls.JournalObj.search(
             [
@@ -59,5 +64,10 @@ class TestDatevExport(BaseCommon):
             }
         )
         invoice.action_post()
-        # Check the name of the invoice
-        self.assertIn(invoice.name, invoice.l10n_din5008_document_title)
+        html, _ = self.env["ir.actions.report"]._render_qweb_html(
+            "account.report_invoice_with_payments", invoice.ids
+        )
+        expected = r"Invoice\\n\s*</span>\s*\\n\s*<span>\s*\\n\s*" + re.escape(
+            invoice.name
+        )
+        self.assertRegex(str(html), expected)
