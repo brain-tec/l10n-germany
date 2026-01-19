@@ -16,7 +16,7 @@ class DatevField:
         self.regex = regex
 
 
-class DatevWriter(object):
+class DatevWriter:
     def __init__(
         self,
         data_type,
@@ -107,7 +107,9 @@ class DatevWriter(object):
 
     def writeheader(self):
         self.buffer.write(BOM_UTF8.decode("utf8"))
-        for i, (field, value) in enumerate(zip(self.header_fields, self.header)):
+        for i, (field, value) in enumerate(
+            zip(self.header_fields, self.header, strict=False)
+        ):
             if i > 0:
                 self.buffer.write(";")
             self.buffer.write(self._coerce_value(field, value))

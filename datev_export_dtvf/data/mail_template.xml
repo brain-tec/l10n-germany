@@ -8,8 +8,8 @@
             <h1>Dear recipient,</h1>
             <p>
             please find attached the latest DATEV export from <t
-                    t-out="object.company_id.name"
-                />.
+                t-out="object.company_id.name"
+            />.
             </p>
         </field>
     </record>
