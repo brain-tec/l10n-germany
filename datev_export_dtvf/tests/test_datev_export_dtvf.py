@@ -6,8 +6,11 @@ import io
 import unittest
 import zipfile
 
+from dateutil.relativedelta import relativedelta
+
 from odoo.exceptions import ValidationError
-from odoo.tests.common import Form, TransactionCase, can_import
+from odoo.tests import Form
+from odoo.tests.common import TransactionCase, can_import
 
 
 class TestDatevExportDtvf(TransactionCase):
@@ -49,14 +52,14 @@ class TestDatevExportDtvf(TransactionCase):
             {
                 "name": "Revenue",
                 "code": "424242",
-                "user_type_id": self.env.ref("account.data_account_type_revenue").id,
+                "account_type": "income",
             }
         )
         self.account2 = self.env["account.account"].create(
             {
                 "name": "Receivable",
                 "code": "424243",
-                "user_type_id": self.env.ref("account.data_account_type_receivable").id,
+                "account_type": "asset_receivable",
                 "reconcile": True,
             }
         )
@@ -134,7 +137,9 @@ class TestDatevExportDtvf(TransactionCase):
                 self.assertIn('"40"', move_line)
 
     def test_move_line_without_account(self):
-        """Test that non-accounting (display_type!=False) lines don't crash the export"""
+        """
+        Test that non-accounting (display_type!=False) lines don't crash the export
+        """
         self.move.write(
             {
                 "line_ids": [
@@ -152,7 +157,7 @@ class TestDatevExportDtvf(TransactionCase):
         self.move.action_post()
         self.wizard.action_generate()
 
-    def test_sequence(self):
+    def test_partner_numbering_sequence(self):
         """Test datev_partner_numbering = sequence"""
         self.wizard.company_id.datev_partner_numbering = "sequence"
         self.wizard.company_id.datev_customer_sequence_id = self.env[
@@ -187,3 +192,42 @@ class TestDatevExportDtvf(TransactionCase):
         self.customer.l10n_de_datev_identifier_customer = "424242"
         self.move.action_post()
         self.wizard.action_generate()
+
+    def test_cron(self):
+        """Test the cronjob"""
+        last_month = self.env["date.range"].create(
+            {
+                "name": "month range",
+                "type_id": self.env["date.range.type"]
+                .create(
+                    {
+                        "name": "test month type",
+                    }
+                )
+                .id,
+                "date_start": datetime.date.today() - relativedelta(months=1, day=1),
+                "date_end": datetime.date.today()
+                - relativedelta(months=1, day=1)
+                + relativedelta(months=1, days=-1),
+            }
+        )
+        self.env["date.range"].create(
+            {
+                "name": "year range",
+                "type_id": self.env["date.range.type"]
+                .create(
+                    {
+                        "name": "test year type",
+                    }
+                )
+                .id,
+                "date_start": last_month.date_start + relativedelta(month=1, day=1),
+                "date_end": last_month.date_start + relativedelta(month=12, day=31),
+            }
+        )
+        cronjob = self.env.ref("datev_export_dtvf.cron_export")
+
+        mails_before = self.env["mail.mail"].search([])
+        cronjob.ir_actions_server_id.run()
+        new_mail = self.env["mail.mail"].search([]) - mails_before
+        self.assertTrue(new_mail)

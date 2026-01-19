@@ -40,8 +40,8 @@ Configuration
 
 To configure this module, you need to:
 
-1. Go to your company
-2. Fill in the fields in the DATEV tab
+1. Go to Settings -> Invoicing
+2. Fill in the fields in the DATEV section
 3. For accounts where you want to suppress automatic calculations (for
    ie taxes), set the according flag
 

@@ -3,7 +3,7 @@
 {
     "name": "DATEV",
     "summary": "Export Data for DATEV (dtvf)",
-    "version": "15.0.2.0.0",
+    "version": "18.0.1.0.0",
     "development_status": "Beta",
     "category": "Accounting",
     "website": "https://github.com/OCA/l10n-germany",
@@ -20,6 +20,7 @@
         "security/ir.model.access.csv",
         "views/account_account.xml",
         "views/datev_export_dtvf.xml",
+        "views/res_config_settings.xml",
         "views/res_partner.xml",
     ],
 }

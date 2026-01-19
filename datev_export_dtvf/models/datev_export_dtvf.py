@@ -22,26 +22,17 @@ class DatevExportDtvfExport(models.Model):
     fiscalyear_id = fields.Many2one(
         "date.range",
         string="Fiscal year",
-        states={"draft": [("required", True), ("readonly", False)]},
-        readonly=True,
     )
-    name = fields.Char(
-        states={"draft": [("required", True), ("readonly", False)]},
-        readonly=True,
-    )
+    name = fields.Char()
     fiscalyear_start = fields.Date(related="fiscalyear_id.date_start")
     fiscalyear_end = fields.Date(related="fiscalyear_id.date_end")
     period_ids = fields.Many2many(
         "date.range",
         string="Periods",
-        states={"draft": [("required", True), ("readonly", False)]},
-        readonly=True,
     )
     journal_ids = fields.Many2many(
         "account.journal",
         string="Journals",
-        states={"draft": [("readonly", False)]},
-        readonly=True,
     )
     date_generated = fields.Datetime("Generated at", readonly=True, copy=False)
     file_data = fields.Binary("Data", readonly=True, copy=False)
@@ -80,7 +71,7 @@ class DatevExportDtvfExport(models.Model):
                 )
             ):
                 raise exceptions.ValidationError(
-                    _("Please fill in the DATEV tab of your company")
+                    _("Please fill in the DATEV section in the invoicing configuration")
                 )
 
             zip_buffer = io.BytesIO()
@@ -123,9 +114,8 @@ class DatevExportDtvfExport(models.Model):
                 for move in moves:
                     writer.writerows(this._get_data_transaction(move))
 
-                filename = (
-                    "EXTF_Buchungsstapel_%s.csv"
-                    % date_range.date_start.strftime("%Y%m%d")
+                filename = "EXTF_Buchungsstapel_{}.csv".format(
+                    date_range.date_start.strftime("%Y%m%d")
                 )
                 zip_file.writestr(filename, writer.buffer.getvalue())
 
@@ -146,7 +136,7 @@ class DatevExportDtvfExport(models.Model):
 
             accounts = self.env["account.account"].search(
                 [
-                    ("company_id", "=", this.company_id.id),
+                    ("company_ids", "=", this.company_id.id),
                 ]
             )
             writer = DatevAccountWriter(
@@ -178,7 +168,8 @@ class DatevExportDtvfExport(models.Model):
         move_line2amount = {
             move_line: move_line.credit or move_line.debit
             for move_line in move.line_ids
-            if not move_line.display_type and (move_line.debit or move_line.credit)
+            if not move_line.display_type.startswith("line_")
+            and (move_line.debit or move_line.credit)
         }
         currency = move.currency_id or move.company_id.currency_id
         code_length = move.company_id.datev_account_code_length
@@ -199,10 +190,13 @@ class DatevExportDtvfExport(models.Model):
                     if currency.is_zero(move_line2amount[move_line2]):
                         move_line2amount.pop(move_line2)
                     break
-            if move_line.account_id.internal_type not in (
-                "receivable",
-                "payable",
-            ) and move_line2.account_id.internal_type in ("receivable", "payable"):
+            if move_line.account_id.account_type not in (
+                "asset_receivable",
+                "liability_payable",
+            ) and move_line2.account_id.account_type in (
+                "asset_receivable",
+                "liability_payable",
+            ):
                 move_line, move_line2 = move_line2, move_line
             if move_line.account_id.datev_export_nonautomatic:
                 move_line, move_line2 = move_line2, move_line
@@ -215,10 +209,10 @@ class DatevExportDtvfExport(models.Model):
                     )
                     number_type = (
                         "customer"
-                        if ml.account_id.internal_type == "receivable"
+                        if ml.account_id.account_type == "asset_receivable"
                         else (
                             "supplier"
-                            if ml.account_id.internal_type == "payable"
+                            if ml.account_id.account_type == "liability_payable"
                             else None
                         )
                     )
@@ -231,7 +225,7 @@ class DatevExportDtvfExport(models.Model):
                     else:
                         offset_account_number = number
             data = {
-                "Umsatz (ohne Soll/Haben-Kz)": ("%.2f" % abs(amount)).replace(".", ","),
+                "Umsatz (ohne Soll/Haben-Kz)": f"{abs(amount):.2f}".replace(".", ","),
                 "Soll/Haben-Kennzeichen": move_line.debit and "S" or "H",
                 "Konto": account_number,
                 "Gegenkonto (ohne BU-Schlüssel)": offset_account_number,
@@ -259,33 +253,28 @@ class DatevExportDtvfExport(models.Model):
                 )[:1].name
                 or move.name,
                 "Belegfeld 2": move_line2.name,
-                "KOST1 - Kostenstelle": move_line.analytic_account_id.code
-                or move_line.analytic_account_id.name
-                or move_line2.analytic_account_id.code
-                or move_line2.analytic_account_id.name,
+                "KOST1 - Kostenstelle": move_line.analytic_line_ids[:1].account_id.code
+                or move_line.analytic_line_ids[:1].account_id.name
+                or move_line2.analytic_line_ids[:1].account_id.code
+                or move_line2.analytic_line_ids[:1].account_id.name,
                 "KOST-Datum": move.date.strftime("%d%m%Y"),
             }
             if move_line.amount_currency:
                 factor = abs(amount / (move_line.debit or move_line.credit))
+                rate = 1 / currency._get_conversion_rate(
+                    move_line.currency_id,
+                    currency,
+                    move.company_id,
+                    move.date,
+                )
                 data.update(
                     {
                         "Umsatz (ohne Soll/Haben-Kz)": (
-                            "%.2f" % abs(move_line.amount_currency * factor)
+                            f"{abs(move_line.amount_currency * factor):.2f}"
                         ).replace(".", ","),
                         "WKZ Umsatz": move_line.currency_id.name,
-                        "Kurs": (
-                            "%.6f"
-                            % (
-                                1
-                                / currency._get_conversion_rate(
-                                    move_line.currency_id,
-                                    currency,
-                                    move.company_id,
-                                    move.date,
-                                )
-                            )
-                        ).replace(".", ","),
-                        "Basis-Umsatz": ("%.2f" % abs(amount)).replace(".", ","),
+                        "Kurs": f"{rate:.6f}".replace(".", ","),
+                        "Basis-Umsatz": f"{abs(amount):.2f}".replace(".", ","),
                         "WKZ Basis-Umsatz": currency.name,
                     }
                 )
@@ -337,7 +326,7 @@ class DatevExportDtvfExport(models.Model):
     def _get_data_account(self, account):
         yield {
             "Konto": account.datev_code
-            or account.code[-account.company_id.datev_account_code_length :],
+            or account.code[-self.company_id.datev_account_code_length :],
             "Kontobeschriftung": account.name,
             "SprachId": self.env.user.lang.replace("_", "-"),
             "Kontenbeschriftung lang": account.name,
@@ -345,18 +334,19 @@ class DatevExportDtvfExport(models.Model):
 
     def _get_partner_number(self, partner, number_type, generate=False):
         if self.company_id.datev_partner_numbering == "sequence":
-            field_name = "l10n_de_datev_export_identifier_%s" % number_type
+            field_name = f"l10n_de_datev_export_identifier_{number_type}"
             if not partner[field_name] and generate:
                 getattr(
                     partner,
-                    "action_l10n_de_datev_export_identifier_%s" % number_type,
+                    f"action_l10n_de_datev_export_identifier_{number_type}",
                 )()
             return partner[field_name]
         elif self.company_id.datev_partner_numbering == "ee":
             account_length = self.env["account.general.ledger"]._get_account_length()
             return partner[
-                "l10n_de_datev_identifier%s"
-                % ("_customer" if number_type == "customer" else "")
+                "l10n_de_datev_identifier{}".format(
+                    "_customer" if number_type == "customer" else ""
+                )
             ] or str(
                 (1 if number_type == "customer" else 7) * 10**account_length
                 + partner.id

@@ -10,14 +10,14 @@
                     <button
                         type="object"
                         name="action_generate"
-                        states="draft"
+                        invisible="state != 'draft'"
                         class="btn-primary"
                         string="Generate"
                     />
                     <button
                         type="object"
                         name="action_draft"
-                        states="done"
+                        invisible="state != 'done'"
                         class="btn-secondary"
                         string="Reset to draft"
                     />
@@ -25,18 +25,31 @@
                 </header>
                 <sheet>
                     <group name="data">
-                        <field name="fiscalyear_id" />
-                        <field name="name" />
+                        <field
+                            name="fiscalyear_id"
+                            required="state == 'draft'"
+                            readonly="state != 'draft'"
+                        />
+                        <field
+                            name="name"
+                            required="state == 'draft'"
+                            readonly="state != 'draft'"
+                        />
                         <field name="fiscalyear_start" invisible="True" />
                         <field name="fiscalyear_end" invisible="True" />
                         <field
                             name="period_ids"
                             domain="[('date_start', '&gt;=', fiscalyear_start), ('date_end', '&lt;=', fiscalyear_end)]"
-                            attrs="{'readonly': [('fiscalyear_id', '=', False)]}"
+                            readonly="not fiscalyear_id or state != 'draft'"
+                            required="state == 'draft'"
                         />
-                        <field name="journal_ids" widget="many2many_tags" />
+                        <field
+                            name="journal_ids"
+                            widget="many2many_tags"
+                            readonly="state != 'draft'"
+                        />
                     </group>
-                    <group name="result" states="done">
+                    <group name="result" invisible="state != 'done'">
                         <field name="date_generated" />
                         <field name="file_name" invisible="True" />
                         <field name="file_data" filename="file_name" />
@@ -49,12 +62,12 @@
     <record id="datev_export_dtvf_view_tree" model="ir.ui.view">
         <field name="model">datev_export_dtvf.export</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="display_name" />
                 <field name="fiscalyear_id" />
                 <field name="state" />
                 <field name="date_generated" />
-            </tree>
+            </list>
         </field>
     </record>
 
