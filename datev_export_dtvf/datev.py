@@ -128,7 +128,7 @@ class DatevWriter:
         if field.length:
             value = str(value)[: field.length]
         if field.quote:
-            value = '"%s"' % str(value).replace('"', '""')
+            value = f'''"{str(value).replace('"', '""')}"'''
         return str(value)
 
     def writerow(self, row):
@@ -165,7 +165,7 @@ class DatevTransactionWriter(DatevWriter):
             account_code_length,
             period_start,
             period_end,
-            "Buchungsstapel %s" % period_start,
+            f"Buchungsstapel {period_start}",
             user_initials,
             currency,
             [

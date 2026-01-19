@@ -9,24 +9,25 @@
             <xpath expr="//page[@name='accounting']/group" position="inside">
                 <group
                     name="datev_export_dtvf"
-                    attrs="{'invisible': [('l10n_de_datev_export_show', '=', False)]}"
+                    string="DATEV identifiers"
+                    invisible="not l10n_de_datev_export_show"
                 >
                     <field name="l10n_de_datev_export_show" invisible="True" />
                     <field name="l10n_de_datev_export_identifier_customer" />
                     <button
                         type="object"
                         name="action_l10n_de_datev_export_identifier_customer"
-                        attrs="{'invisible': [('l10n_de_datev_export_identifier_customer', '!=', False)]}"
                         class="btn btn-secondary"
                         string="Generate"
+                        invisible="l10n_de_datev_export_identifier_customer"
                     />
                     <field name="l10n_de_datev_export_identifier_supplier" />
                     <button
                         type="object"
                         name="action_l10n_de_datev_export_identifier_supplier"
-                        attrs="{'invisible': [('l10n_de_datev_export_identifier_supplier', '!=', False)]}"
                         class="btn btn-secondary"
                         string="Generate"
+                        invisible="l10n_de_datev_export_identifier_supplier"
                     />
                 </group>
             </xpath>

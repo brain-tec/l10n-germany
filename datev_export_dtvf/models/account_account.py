@@ -13,5 +13,6 @@ class AccountAccount(models.Model):
         "in DATEV.",
     )
     datev_code = fields.Char(
-        help="In case your COA codes don't work for DATEV, fill in an alternative code here"
+        help="In case your COA codes don't work for DATEV, fill in an alternative code "
+        "here"
     )
