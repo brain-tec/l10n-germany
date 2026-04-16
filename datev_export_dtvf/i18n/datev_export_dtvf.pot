@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 15.0\n"
+"Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -29,8 +29,18 @@ msgid "Account"
 msgstr ""
 
 #. module: datev_export_dtvf
+#: model:ir.model,name:datev_export_dtvf.model_res_company
+msgid "Companies"
+msgstr ""
+
+#. module: datev_export_dtvf
 #: model:ir.model.fields,field_description:datev_export_dtvf.field_datev_export_dtvf_export__company_id
 msgid "Company"
+msgstr ""
+
+#. module: datev_export_dtvf
+#: model:ir.model,name:datev_export_dtvf.model_res_config_settings
+msgid "Config Settings"
 msgstr ""
 
 #. module: datev_export_dtvf
@@ -55,9 +65,28 @@ msgid "DATEV DTVF Export"
 msgstr ""
 
 #. module: datev_export_dtvf
+#: model:ir.model.fields,field_description:datev_export_dtvf.field_res_company__datev_partner_numbering
+#: model:ir.model.fields,field_description:datev_export_dtvf.field_res_config_settings__datev_partner_numbering
+#: model_terms:ir.ui.view,arch_db:datev_export_dtvf.res_config_settings_view_form
+msgid "DATEV Partner numbering"
+msgstr ""
+
+#. module: datev_export_dtvf
+#: model:ir.model.fields,field_description:datev_export_dtvf.field_res_company__datev_account_code_length
+#: model:ir.model.fields,field_description:datev_export_dtvf.field_res_config_settings__datev_account_code_length
+#: model_terms:ir.ui.view,arch_db:datev_export_dtvf.res_config_settings_view_form
+msgid "DATEV account code length"
+msgstr ""
+
+#. module: datev_export_dtvf
 #: model:ir.model,name:datev_export_dtvf.model_datev_export_dtvf_export
 #: model:mail.template,name:datev_export_dtvf.mail_template_cron_export
 msgid "DATEV export"
+msgstr ""
+
+#. module: datev_export_dtvf
+#: model_terms:ir.ui.view,arch_db:datev_export_dtvf.view_res_partner_form
+msgid "DATEV identifiers"
 msgstr ""
 
 #. module: datev_export_dtvf
@@ -70,6 +99,18 @@ msgstr ""
 #: model:ir.model.fields,field_description:datev_export_dtvf.field_res_partner__l10n_de_datev_export_identifier_supplier
 #: model:ir.model.fields,field_description:datev_export_dtvf.field_res_users__l10n_de_datev_export_identifier_supplier
 msgid "DATEV number (supplier)"
+msgstr ""
+
+#. module: datev_export_dtvf
+#: model:ir.model.fields,field_description:datev_export_dtvf.field_res_company__datev_customer_sequence_id
+#: model:ir.model.fields,field_description:datev_export_dtvf.field_res_config_settings__datev_customer_sequence_id
+msgid "DATEV sequence for customers"
+msgstr ""
+
+#. module: datev_export_dtvf
+#: model:ir.model.fields,field_description:datev_export_dtvf.field_res_company__datev_supplier_sequence_id
+#: model:ir.model.fields,field_description:datev_export_dtvf.field_res_config_settings__datev_supplier_sequence_id
+msgid "DATEV sequence for suppliers"
 msgstr ""
 
 #. module: datev_export_dtvf
@@ -147,11 +188,6 @@ msgid "L10N De Datev Export Show"
 msgstr ""
 
 #. module: datev_export_dtvf
-#: model:ir.model.fields,field_description:datev_export_dtvf.field_datev_export_dtvf_export____last_update
-msgid "Last Modified on"
-msgstr ""
-
-#. module: datev_export_dtvf
 #: model:ir.model.fields,field_description:datev_export_dtvf.field_datev_export_dtvf_export__write_uid
 msgid "Last Updated by"
 msgstr ""
@@ -163,8 +199,6 @@ msgstr ""
 
 #. module: datev_export_dtvf
 #: model:ir.actions.server,name:datev_export_dtvf.cron_export_ir_actions_server
-#: model:ir.cron,cron_name:datev_export_dtvf.cron_export
-#: model:ir.cron,name:datev_export_dtvf.cron_export
 msgid "Monthly DATEV export via mail (dtvf)"
 msgstr ""
 
@@ -179,9 +213,9 @@ msgid "Periods"
 msgstr ""
 
 #. module: datev_export_dtvf
+#. odoo-python
 #: code:addons/datev_export_dtvf/models/datev_export_dtvf.py:0
-#, python-format
-msgid "Please fill in the DATEV tab of your company"
+msgid "Please fill in the DATEV section in the invoicing configuration"
 msgstr ""
 
 #. module: datev_export_dtvf
@@ -202,6 +236,11 @@ msgstr ""
 #. module: datev_export_dtvf
 #: model:ir.model.fields,field_description:datev_export_dtvf.field_account_account__datev_export_nonautomatic
 msgid "Suppress automatic calculations in DATEV"
+msgstr ""
+
+#. module: datev_export_dtvf
+#: model_terms:ir.ui.view,arch_db:datev_export_dtvf.res_config_settings_view_form
+msgid "The length of an account code in DATEV"
 msgstr ""
 
 #. module: datev_export_dtvf
