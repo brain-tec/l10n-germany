@@ -1,8 +1,9 @@
 [project]
 name = "odoo-addons-oca-l10n-germany"
-version = "18.0.20260319.0"
+version = "18.0.20260416.0"
 dependencies = [
     "odoo-addon-datev_export==18.0.*",
+    "odoo-addon-datev_export_dtvf==18.0.*",
     "odoo-addon-datev_export_xml==18.0.*",
     "odoo-addon-datev_import_csv_dtvf==18.0.*",
     "odoo-addon-l10n_de_location_nuts==18.0.*",
