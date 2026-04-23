@@ -5,7 +5,7 @@ import io
 import string
 import zipfile
 
-from odoo import _, api, exceptions, fields, models
+from odoo import api, exceptions, fields, models
 from odoo.osv.expression import TRUE_LEAF
 
 from ..datev import DatevAccountWriter, DatevPartnerWriter, DatevTransactionWriter
@@ -71,7 +71,10 @@ class DatevExportDtvfExport(models.Model):
                 )
             ):
                 raise exceptions.ValidationError(
-                    _("Please fill in the DATEV section in the invoicing configuration")
+                    self.env._(
+                        "Please fill in the DATEV section in the invoicing "
+                        "configuration"
+                    )
                 )
 
             zip_buffer = io.BytesIO()

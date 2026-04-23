@@ -14,12 +14,14 @@ from odoo.tests.common import TransactionCase, can_import
 
 
 class TestDatevExportDtvf(TransactionCase):
-    def setUp(self):
-        super().setUp()
-        self.range = self.env["date.range"].create(
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
+        cls.range = cls.env["date.range"].create(
             {
                 "name": "testrange",
-                "type_id": self.env["date.range.type"]
+                "type_id": cls.env["date.range.type"]
                 .create(
                     {
                         "name": "testtype",
@@ -30,32 +32,32 @@ class TestDatevExportDtvf(TransactionCase):
                 "date_end": datetime.date.today(),
             }
         )
-        with Form(self.env["datev_export_dtvf.export"]) as WizardForm:
-            WizardForm.fiscalyear_id = self.range
-            WizardForm.period_ids.add(self.range)
-            self.wizard = WizardForm.save()
-        self.env.user.company_id.write(
+        with Form(cls.env["datev_export_dtvf.export"]) as WizardForm:
+            WizardForm.fiscalyear_id = cls.range
+            WizardForm.period_ids.add(cls.range)
+            cls.wizard = WizardForm.save()
+        cls.env.user.company_id.write(
             {
                 "datev_consultant_number": "4242424",
                 "datev_client_number": "42424",
                 "datev_account_code_length": 4,
             }
         )
-        self.journal = self.env["account.journal"].create(
+        cls.journal = cls.env["account.journal"].create(
             {
                 "name": "Testjournal",
                 "type": "sale",
                 "code": "DTV",
             }
         )
-        self.account1 = self.env["account.account"].create(
+        cls.account1 = cls.env["account.account"].create(
             {
                 "name": "Revenue",
                 "code": "424242",
                 "account_type": "income",
             }
         )
-        self.account2 = self.env["account.account"].create(
+        cls.account2 = cls.env["account.account"].create(
             {
                 "name": "Receivable",
                 "code": "424243",
@@ -63,19 +65,19 @@ class TestDatevExportDtvf(TransactionCase):
                 "reconcile": True,
             }
         )
-        self.customer = self.env["res.partner"].search(
+        cls.customer = cls.env["res.partner"].search(
             [("is_company", "=", True)],
             limit=1,
         )
-        self.move = self.env["account.move"].create(
+        cls.move = cls.env["account.move"].create(
             {
-                "journal_id": self.journal.id,
+                "journal_id": cls.journal.id,
                 "line_ids": [
                     (
                         0,
                         0,
                         {
-                            "account_id": self.account1.id,
+                            "account_id": cls.account1.id,
                             "credit": 42,
                         },
                     ),
@@ -83,9 +85,9 @@ class TestDatevExportDtvf(TransactionCase):
                         0,
                         0,
                         {
-                            "account_id": self.account2.id,
+                            "account_id": cls.account2.id,
                             "debit": 42,
-                            "partner_id": self.customer.id,
+                            "partner_id": cls.customer.id,
                         },
                     ),
                 ],
