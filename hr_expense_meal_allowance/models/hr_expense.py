@@ -18,8 +18,12 @@ class HrExpense(models.Model):
         domain="['|', ('expire_on', '=', False),('expire_on', '>=', travel_end)]",
     )
 
-    number_of_days = fields.Integer(compute="_compute_number_of_travel_days")
-    number_of_travel_days = fields.Integer(compute="_compute_number_of_travel_days")
+    number_of_days = fields.Integer(
+        "Whole Days", compute="_compute_number_of_travel_days"
+    )
+    number_of_travel_days = fields.Integer(
+        "Travel Days", compute="_compute_number_of_travel_days"
+    )
     meal_allowance_ids = fields.One2many(
         "hr.expense.meal.allowance", "hr_expense_id", string="Included Meals"
     )
@@ -140,7 +144,11 @@ class HrExpense(models.Model):
         for record in self:
             rates = []
 
-            if record.customer_id.city and record.customer_id.country_id:
+            if (
+                record.customer_id.city
+                and record.customer_id.country_id
+                and record.travel_end
+            ):
                 rates = self.env["hr.expense.meal.allowance.rate"].search(
                     [
                         ("country_id", "=", record.customer_id.country_id.id),
@@ -151,7 +159,7 @@ class HrExpense(models.Model):
                     ],
                 )
 
-            if not rates and record.customer_id.country_id:
+            if not rates and record.customer_id.country_id and record.travel_end:
                 rates = self.env["hr.expense.meal.allowance.rate"].search(
                     [
                         ("country_id", "=", record.customer_id.country_id.id),
@@ -170,7 +178,7 @@ class HrExpense(models.Model):
 
     def action_print(self):
         self.ensure_one()
-        lang = self.employee_id.lang or self.employee_id.company_id.partner_id.lang
+        lang = self.employee_id.company_id.partner_id.lang
         return (
             self.env.ref(
                 "hr_expense_meal_allowance.action_report_hr_expense_meal_allowance"
