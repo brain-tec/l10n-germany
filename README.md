@@ -21,6 +21,7 @@ Available addons
 ----------------
 addon | version | maintainers | summary
 --- | --- | --- | ---
+[datev_export](datev_export/) | 19.0.1.0.0 |  | Export invoices and refunds as xml and pdf files zipped in DATEV format.
 [l10n_din5008_move_name](l10n_din5008_move_name/) | 19.0.1.0.0 |  | Add Account move name on the name of the move
 
 [//]: # (end addons)
