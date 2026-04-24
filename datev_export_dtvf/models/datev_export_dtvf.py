@@ -6,7 +6,7 @@ import string
 import zipfile
 
 from odoo import api, exceptions, fields, models
-from odoo.osv.expression import TRUE_LEAF
+from odoo.fields import Domain
 
 from ..datev import DatevAccountWriter, DatevPartnerWriter, DatevTransactionWriter
 
@@ -96,7 +96,7 @@ class DatevExportDtvfExport(models.Model):
                         ("company_id", "=", this.company_id.id),
                         ("journal_id", "in", this.journal_ids.ids)
                         if this.journal_ids
-                        else TRUE_LEAF,
+                        else Domain.TRUE,
                     ],
                     order="date desc",
                 )
