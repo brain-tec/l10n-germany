@@ -7,7 +7,7 @@
     "author": "MT Software, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/l10n-germany",
     "license": "AGPL-3",
-    "version": "19.0.1.0.1",
+    "version": "18.0.1.0.1",
     "depends": ["l10n_din5008"],
     "data": [
         "report/din5008_report.xml",
