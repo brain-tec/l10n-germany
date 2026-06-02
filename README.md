@@ -29,6 +29,7 @@ addon | version | maintainers | summary
 [l10n_de_mis_reports](l10n_de_mis_reports/) | 18.0.1.0.0 |  | MIS Builder templates for the German P&L and Balance Sheets (SKR03 + SKR04)
 [l10n_de_tax_statement](l10n_de_tax_statement/) | 18.0.3.0.0 | <a href='https://github.com/mt-software-de'><img src='https://github.com/mt-software-de.png' width='32' height='32' style='border-radius:50%;' alt='mt-software-de'/></a> | German VAT Statement
 [l10n_de_tax_statement_zm](l10n_de_tax_statement_zm/) | 18.0.2.0.0 |  | German VAT Statement Extension
+[l10n_din5008_company_header_country_invisible](l10n_din5008_company_header_country_invisible/) | 18.0.1.0.1 |  | Do not display the companies country on the header of the address block
 [l10n_din5008_move_name](l10n_din5008_move_name/) | 18.0.1.0.0 |  | Add Account move name on the name of the move
 
 [//]: # (end addons)
